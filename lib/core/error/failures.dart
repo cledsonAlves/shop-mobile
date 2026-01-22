@@ -29,6 +29,10 @@ class UnauthorizedFailure extends Failure {
   const UnauthorizedFailure([super.message = 'Não autorizado']);
 }
 
+class AuthFailure extends Failure {
+  const AuthFailure([super.message = 'Erro de autenticação']);
+}
+
 class NotFoundFailure extends Failure {
   const NotFoundFailure([super.message = 'Não encontrado']);
 }

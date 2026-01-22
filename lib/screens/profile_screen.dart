@@ -17,7 +17,7 @@ class ProfileScreen extends StatelessWidget {
                 children: [
                   CircleAvatar(radius: 50, backgroundImage: NetworkImage('https://i.pravatar.cc/150?u=maria')),
                   SizedBox(height: 16),
-                  Text('Maria Silva', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+                  Text('Cledson Alves', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
                   Text('⭐ 4.9 • Membro desde 2023', style: TextStyle(color: Colors.grey)),
                 ],
               ),
@@ -61,7 +61,7 @@ class ProfileScreen extends StatelessWidget {
             SizedBox(height: 32),
             _buildMenuSection('Minha Conta', [
               _buildMenuItem(Icons.person_outline, 'Dados Pessoais'),
-              _buildMenuItem(Icons.location_on_outline, 'Meus Endereços'),
+              _buildMenuItem(Icons.location_on_outlined, 'Meus Endereços'),
               _buildMenuItem(Icons.account_balance_wallet_outlined, 'Carteira & Pagamento'),
             ]),
             SizedBox(height: 24),
@@ -74,7 +74,7 @@ class ProfileScreen extends StatelessWidget {
               onPressed: () {},
               child: Text('SAIR DA CONTA', style: TextStyle(color: Colors.red, fontWeight: FontWeight.bold)),
             ),
-            Text('Jarinu Shop v1.4.0', style: TextStyle(color: Colors.grey, fontSize: 10)),
+            Text('Jarinu Shop v1.0.0', style: TextStyle(color: Colors.grey, fontSize: 10)),
           ],
         ),
       ),

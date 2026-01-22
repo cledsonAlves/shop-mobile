@@ -15,6 +15,7 @@ class StoreEntity with _$StoreEntity {
     String? description,
     String? address,
     String? phone,
+    String? cityId,
     @Default(true) bool isOpen,
   }) = _StoreEntity;
 }

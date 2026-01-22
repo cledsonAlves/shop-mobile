@@ -21,11 +21,16 @@ CategoryModel _$CategoryModelFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$CategoryModel {
   String get id => throw _privateConstructorUsedError;
-  String get name => throw _privateConstructorUsedError;
-  String get icon => throw _privateConstructorUsedError;
-  String? get description => throw _privateConstructorUsedError;
-  @JsonKey(name: 'image_url')
-  String? get imageUrl => throw _privateConstructorUsedError;
+  @JsonKey(name: 'lojista_id')
+  String get lojistaId => throw _privateConstructorUsedError;
+  String get nome => throw _privateConstructorUsedError;
+  String? get descricao => throw _privateConstructorUsedError;
+  bool get ativo => throw _privateConstructorUsedError;
+  int get ordem => throw _privateConstructorUsedError;
+  @JsonKey(name: 'criado_em')
+  String? get criadoEm => throw _privateConstructorUsedError;
+  @JsonKey(name: 'atualizado_em')
+  String? get atualizadoEm => throw _privateConstructorUsedError;
 
   /// Serializes this CategoryModel to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -45,10 +50,13 @@ abstract class $CategoryModelCopyWith<$Res> {
   @useResult
   $Res call(
       {String id,
-      String name,
-      String icon,
-      String? description,
-      @JsonKey(name: 'image_url') String? imageUrl});
+      @JsonKey(name: 'lojista_id') String lojistaId,
+      String nome,
+      String? descricao,
+      bool ativo,
+      int ordem,
+      @JsonKey(name: 'criado_em') String? criadoEm,
+      @JsonKey(name: 'atualizado_em') String? atualizadoEm});
 }
 
 /// @nodoc
@@ -67,31 +75,46 @@ class _$CategoryModelCopyWithImpl<$Res, $Val extends CategoryModel>
   @override
   $Res call({
     Object? id = null,
-    Object? name = null,
-    Object? icon = null,
-    Object? description = freezed,
-    Object? imageUrl = freezed,
+    Object? lojistaId = null,
+    Object? nome = null,
+    Object? descricao = freezed,
+    Object? ativo = null,
+    Object? ordem = null,
+    Object? criadoEm = freezed,
+    Object? atualizadoEm = freezed,
   }) {
     return _then(_value.copyWith(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      name: null == name
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
+      lojistaId: null == lojistaId
+          ? _value.lojistaId
+          : lojistaId // ignore: cast_nullable_to_non_nullable
               as String,
-      icon: null == icon
-          ? _value.icon
-          : icon // ignore: cast_nullable_to_non_nullable
+      nome: null == nome
+          ? _value.nome
+          : nome // ignore: cast_nullable_to_non_nullable
               as String,
-      description: freezed == description
-          ? _value.description
-          : description // ignore: cast_nullable_to_non_nullable
+      descricao: freezed == descricao
+          ? _value.descricao
+          : descricao // ignore: cast_nullable_to_non_nullable
               as String?,
-      imageUrl: freezed == imageUrl
-          ? _value.imageUrl
-          : imageUrl // ignore: cast_nullable_to_non_nullable
+      ativo: null == ativo
+          ? _value.ativo
+          : ativo // ignore: cast_nullable_to_non_nullable
+              as bool,
+      ordem: null == ordem
+          ? _value.ordem
+          : ordem // ignore: cast_nullable_to_non_nullable
+              as int,
+      criadoEm: freezed == criadoEm
+          ? _value.criadoEm
+          : criadoEm // ignore: cast_nullable_to_non_nullable
+              as String?,
+      atualizadoEm: freezed == atualizadoEm
+          ? _value.atualizadoEm
+          : atualizadoEm // ignore: cast_nullable_to_non_nullable
               as String?,
     ) as $Val);
   }
@@ -107,10 +130,13 @@ abstract class _$$CategoryModelImplCopyWith<$Res>
   @useResult
   $Res call(
       {String id,
-      String name,
-      String icon,
-      String? description,
-      @JsonKey(name: 'image_url') String? imageUrl});
+      @JsonKey(name: 'lojista_id') String lojistaId,
+      String nome,
+      String? descricao,
+      bool ativo,
+      int ordem,
+      @JsonKey(name: 'criado_em') String? criadoEm,
+      @JsonKey(name: 'atualizado_em') String? atualizadoEm});
 }
 
 /// @nodoc
@@ -127,31 +153,46 @@ class __$$CategoryModelImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = null,
-    Object? name = null,
-    Object? icon = null,
-    Object? description = freezed,
-    Object? imageUrl = freezed,
+    Object? lojistaId = null,
+    Object? nome = null,
+    Object? descricao = freezed,
+    Object? ativo = null,
+    Object? ordem = null,
+    Object? criadoEm = freezed,
+    Object? atualizadoEm = freezed,
   }) {
     return _then(_$CategoryModelImpl(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      name: null == name
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
+      lojistaId: null == lojistaId
+          ? _value.lojistaId
+          : lojistaId // ignore: cast_nullable_to_non_nullable
               as String,
-      icon: null == icon
-          ? _value.icon
-          : icon // ignore: cast_nullable_to_non_nullable
+      nome: null == nome
+          ? _value.nome
+          : nome // ignore: cast_nullable_to_non_nullable
               as String,
-      description: freezed == description
-          ? _value.description
-          : description // ignore: cast_nullable_to_non_nullable
+      descricao: freezed == descricao
+          ? _value.descricao
+          : descricao // ignore: cast_nullable_to_non_nullable
               as String?,
-      imageUrl: freezed == imageUrl
-          ? _value.imageUrl
-          : imageUrl // ignore: cast_nullable_to_non_nullable
+      ativo: null == ativo
+          ? _value.ativo
+          : ativo // ignore: cast_nullable_to_non_nullable
+              as bool,
+      ordem: null == ordem
+          ? _value.ordem
+          : ordem // ignore: cast_nullable_to_non_nullable
+              as int,
+      criadoEm: freezed == criadoEm
+          ? _value.criadoEm
+          : criadoEm // ignore: cast_nullable_to_non_nullable
+              as String?,
+      atualizadoEm: freezed == atualizadoEm
+          ? _value.atualizadoEm
+          : atualizadoEm // ignore: cast_nullable_to_non_nullable
               as String?,
     ));
   }
@@ -162,10 +203,13 @@ class __$$CategoryModelImplCopyWithImpl<$Res>
 class _$CategoryModelImpl extends _CategoryModel {
   const _$CategoryModelImpl(
       {required this.id,
-      required this.name,
-      required this.icon,
-      this.description,
-      @JsonKey(name: 'image_url') this.imageUrl})
+      @JsonKey(name: 'lojista_id') required this.lojistaId,
+      required this.nome,
+      this.descricao,
+      this.ativo = true,
+      this.ordem = 0,
+      @JsonKey(name: 'criado_em') this.criadoEm,
+      @JsonKey(name: 'atualizado_em') this.atualizadoEm})
       : super._();
 
   factory _$CategoryModelImpl.fromJson(Map<String, dynamic> json) =>
@@ -174,18 +218,28 @@ class _$CategoryModelImpl extends _CategoryModel {
   @override
   final String id;
   @override
-  final String name;
+  @JsonKey(name: 'lojista_id')
+  final String lojistaId;
   @override
-  final String icon;
+  final String nome;
   @override
-  final String? description;
+  final String? descricao;
   @override
-  @JsonKey(name: 'image_url')
-  final String? imageUrl;
+  @JsonKey()
+  final bool ativo;
+  @override
+  @JsonKey()
+  final int ordem;
+  @override
+  @JsonKey(name: 'criado_em')
+  final String? criadoEm;
+  @override
+  @JsonKey(name: 'atualizado_em')
+  final String? atualizadoEm;
 
   @override
   String toString() {
-    return 'CategoryModel(id: $id, name: $name, icon: $icon, description: $description, imageUrl: $imageUrl)';
+    return 'CategoryModel(id: $id, lojistaId: $lojistaId, nome: $nome, descricao: $descricao, ativo: $ativo, ordem: $ordem, criadoEm: $criadoEm, atualizadoEm: $atualizadoEm)';
   }
 
   @override
@@ -194,18 +248,23 @@ class _$CategoryModelImpl extends _CategoryModel {
         (other.runtimeType == runtimeType &&
             other is _$CategoryModelImpl &&
             (identical(other.id, id) || other.id == id) &&
-            (identical(other.name, name) || other.name == name) &&
-            (identical(other.icon, icon) || other.icon == icon) &&
-            (identical(other.description, description) ||
-                other.description == description) &&
-            (identical(other.imageUrl, imageUrl) ||
-                other.imageUrl == imageUrl));
+            (identical(other.lojistaId, lojistaId) ||
+                other.lojistaId == lojistaId) &&
+            (identical(other.nome, nome) || other.nome == nome) &&
+            (identical(other.descricao, descricao) ||
+                other.descricao == descricao) &&
+            (identical(other.ativo, ativo) || other.ativo == ativo) &&
+            (identical(other.ordem, ordem) || other.ordem == ordem) &&
+            (identical(other.criadoEm, criadoEm) ||
+                other.criadoEm == criadoEm) &&
+            (identical(other.atualizadoEm, atualizadoEm) ||
+                other.atualizadoEm == atualizadoEm));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, id, name, icon, description, imageUrl);
+  int get hashCode => Object.hash(runtimeType, id, lojistaId, nome, descricao,
+      ativo, ordem, criadoEm, atualizadoEm);
 
   /// Create a copy of CategoryModel
   /// with the given fields replaced by the non-null parameter values.
@@ -226,10 +285,13 @@ class _$CategoryModelImpl extends _CategoryModel {
 abstract class _CategoryModel extends CategoryModel {
   const factory _CategoryModel(
           {required final String id,
-          required final String name,
-          required final String icon,
-          final String? description,
-          @JsonKey(name: 'image_url') final String? imageUrl}) =
+          @JsonKey(name: 'lojista_id') required final String lojistaId,
+          required final String nome,
+          final String? descricao,
+          final bool ativo,
+          final int ordem,
+          @JsonKey(name: 'criado_em') final String? criadoEm,
+          @JsonKey(name: 'atualizado_em') final String? atualizadoEm}) =
       _$CategoryModelImpl;
   const _CategoryModel._() : super._();
 
@@ -239,14 +301,22 @@ abstract class _CategoryModel extends CategoryModel {
   @override
   String get id;
   @override
-  String get name;
+  @JsonKey(name: 'lojista_id')
+  String get lojistaId;
   @override
-  String get icon;
+  String get nome;
   @override
-  String? get description;
+  String? get descricao;
   @override
-  @JsonKey(name: 'image_url')
-  String? get imageUrl;
+  bool get ativo;
+  @override
+  int get ordem;
+  @override
+  @JsonKey(name: 'criado_em')
+  String? get criadoEm;
+  @override
+  @JsonKey(name: 'atualizado_em')
+  String? get atualizadoEm;
 
   /// Create a copy of CategoryModel
   /// with the given fields replaced by the non-null parameter values.

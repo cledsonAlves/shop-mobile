@@ -31,3 +31,6 @@ Este é um aplicativo completo desenvolvido em Flutter para Android e iOS, basea
 - `lib/screens/`: Telas principais do aplicativo.
 - `lib/widgets/`: Componentes reutilizáveis.
 - `lib/theme/`: Configurações de cores e estilos.
+
+
+flutter run -d "51A5E0AB-E5A7-4E75-AE44-8A2EA3095B46"

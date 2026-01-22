@@ -28,13 +28,27 @@ class StoreCard extends StatelessWidget {
             padding: const EdgeInsets.all(12.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
               children: [
-                Text(store.name, style: TextStyle(fontWeight: FontWeight.bold)),
+                Text(
+                  store.name,
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                ),
                 SizedBox(height: 4),
                 Row(
+                  mainAxisSize: MainAxisSize.min,
                   children: [
                     Icon(Icons.star, color: Colors.amber, size: 14),
-                    Text(' ${store.rating} • ${store.deliveryTime}', style: TextStyle(fontSize: 12, color: Colors.grey)),
+                    Flexible(
+                      child: Text(
+                        ' ${store.rating} • ${store.deliveryTime}',
+                        style: TextStyle(fontSize: 12, color: Colors.grey),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ),
                   ],
                 ),
               ],

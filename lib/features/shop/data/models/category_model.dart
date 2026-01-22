@@ -10,10 +10,13 @@ class CategoryModel with _$CategoryModel {
   
   const factory CategoryModel({
     required String id,
-    required String name,
-    required String icon,
-    String? description,
-    @JsonKey(name: 'image_url') String? imageUrl,
+    @JsonKey(name: 'lojista_id') required String lojistaId,
+    required String nome,
+    String? descricao,
+    @Default(true) bool ativo,
+    @Default(0) int ordem,
+    @JsonKey(name: 'criado_em') String? criadoEm,
+    @JsonKey(name: 'atualizado_em') String? atualizadoEm,
   }) = _CategoryModel;
 
   factory CategoryModel.fromJson(Map<String, dynamic> json) =>
@@ -21,17 +24,18 @@ class CategoryModel with _$CategoryModel {
 
   CategoryEntity toEntity() => CategoryEntity(
         id: id,
-        name: name,
-        icon: icon,
-        description: description,
-        imageUrl: imageUrl,
+        name: nome,
+        icon: '',
+        description: descricao,
+        imageUrl: null,
       );
       
   factory CategoryModel.fromEntity(CategoryEntity entity) => CategoryModel(
         id: entity.id,
-        name: entity.name,
-        icon: entity.icon,
-        description: entity.description,
-        imageUrl: entity.imageUrl,
+        lojistaId: '',
+        nome: entity.name,
+        descricao: entity.description,
+        ativo: true,
+        ordem: 0,
       );
 }

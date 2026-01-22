@@ -56,8 +56,9 @@ class MainNavigationScreen extends StatelessWidget {
             label: 'Home',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.search),
-            label: 'Pesquisa',
+            icon: Icon(Icons.storefront_outlined),
+            activeIcon: Icon(Icons.storefront),
+            label: 'Vitrine',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.shopping_basket_outlined),

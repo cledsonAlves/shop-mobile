@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import '../../../../theme/app_theme.dart';
 import '../providers/mock_providers.dart';
 import '../providers/cart_provider.dart';
+import '../widgets/product_image_widget.dart';
 
 class ProductDetailScreen extends ConsumerStatefulWidget {
   final String productId;
@@ -28,6 +29,15 @@ class _ProductDetailScreenState extends ConsumerState<ProductDetailScreen> {
           if (product == null) {
             return const Center(child: Text('Produto não encontrado'));
           }
+          
+          // Busca o lojista para pegar o nome
+          final storeAsync = ref.watch(storeByIdProvider(product.storeId));
+          final storeName = storeAsync.when(
+            data: (store) => store?.name ?? 'Loja',
+            loading: () => 'Carregando...',
+            error: (_, __) => 'Loja',
+          );
+          
           return Stack(
             children: [
               CustomScrollView(
@@ -79,13 +89,10 @@ class _ProductDetailScreenState extends ConsumerState<ProductDetailScreen> {
                       ),
                     ],
                     flexibleSpace: FlexibleSpaceBar(
-                      background: Image.network(
-                        product.imageUrl,
+                      background: ProductImageWidget(
+                        productId: product.id,
+                        fallbackUrl: product.imageUrl,
                         fit: BoxFit.cover,
-                        errorBuilder: (context, error, stackTrace) => Container(
-                          color: Colors.grey[200],
-                          child: const Icon(Icons.image, size: 80, color: Colors.grey),
-                        ),
                       ),
                     ),
                   ),
@@ -136,7 +143,7 @@ class _ProductDetailScreenState extends ConsumerState<ProductDetailScreen> {
                                   child: ClipRRect(
                                     borderRadius: BorderRadius.circular(12),
                                     child: Image.network(
-                                      'https://ui-avatars.com/api/?name=${Uri.encodeComponent(product.storeName)}&background=f06e42&color=fff',
+                                      'https://ui-avatars.com/api/?name=${Uri.encodeComponent(storeName)}&background=f06e42&color=fff',
                                       fit: BoxFit.cover,
                                     ),
                                   ),
@@ -146,8 +153,8 @@ class _ProductDetailScreenState extends ConsumerState<ProductDetailScreen> {
                                   child: Column(
                                     crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
-                                      Text(product.storeName, style: const TextStyle(fontWeight: FontWeight.bold)),
-                                      Text('Vendido e entregue por parceiro local', style: TextStyle(fontSize: 12, color: Colors.grey[600])),
+                                      Text(storeName, style: const TextStyle(fontWeight: FontWeight.bold)),
+                                      Text('Vendido e entregue por $storeName', style: TextStyle(fontSize: 12, color: Colors.grey[600])),
                                     ],
                                   ),
                                 ),
@@ -280,7 +287,7 @@ class _ProductDetailScreenState extends ConsumerState<ProductDetailScreen> {
                         Expanded(
                           child: ElevatedButton(
                             onPressed: () {
-                              ref.read(cartProvider.notifier).addToCart(product, quantity);
+                              ref.read(cartProvider.notifier).addProduct(product, quantity: quantity);
                               ScaffoldMessenger.of(context).showSnackBar(
                                 SnackBar(
                                   content: Text('$quantity x ${product.name} adicionado'),

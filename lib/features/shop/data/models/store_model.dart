@@ -10,16 +10,24 @@ class StoreModel with _$StoreModel {
   
   const factory StoreModel({
     required String id,
-    required String name,
-    required String category,
-    @JsonKey(name: 'image_url') required String imageUrl,
-    required double rating,
-    @JsonKey(name: 'delivery_time') required String deliveryTime,
-    @JsonKey(name: 'delivery_fee') required double deliveryFee,
-    String? description,
-    String? address,
-    String? phone,
-    @JsonKey(name: 'is_open') @Default(true) bool isOpen,
+    required String nome,
+    required String email,
+    @JsonKey(name: 'avatar_url') String? avatarUrl,
+    String? provider,
+    @JsonKey(name: 'cidade_id') String? cidadeId,
+    String? telefone,
+    String? whatsapp,
+    String? endereco,
+    String? numero,
+    String? complemento,
+    String? bairro,
+    String? cep,
+    String? descricao,
+    @JsonKey(name: 'logo_url') String? logoUrl,
+    @JsonKey(name: 'horario_funcionamento') String? horarioFuncionamento,
+    @Default(true) bool ativo,
+    @JsonKey(name: 'criado_em') String? criadoEm,
+    @JsonKey(name: 'atualizado_em') String? atualizadoEm,
   }) = _StoreModel;
 
   factory StoreModel.fromJson(Map<String, dynamic> json) =>
@@ -27,29 +35,34 @@ class StoreModel with _$StoreModel {
 
   StoreEntity toEntity() => StoreEntity(
         id: id,
-        name: name,
-        category: category,
-        imageUrl: imageUrl,
-        rating: rating,
-        deliveryTime: deliveryTime,
-        deliveryFee: deliveryFee,
-        description: description,
-        address: address,
-        phone: phone,
-        isOpen: isOpen,
+        name: nome,
+        category: 'Geral',
+        imageUrl: logoUrl ?? 'https://via.placeholder.com/400x300?text=${Uri.encodeComponent(nome)}',
+        rating: 4.5,
+        deliveryTime: '30-40 min',
+        deliveryFee: 5.0,
+        description: descricao,
+        address: _buildAddress(),
+        phone: whatsapp ?? telefone,
+        isOpen: ativo,
+        cityId: cidadeId,
       );
+
+  String? _buildAddress() {
+    if (endereco == null) return null;
+    final parts = <String>[endereco!];
+    if (numero != null) parts.add(numero!);
+    if (complemento != null) parts.add(complemento!);
+    if (bairro != null) parts.add(bairro!);
+    return parts.join(', ');
+  }
       
   factory StoreModel.fromEntity(StoreEntity entity) => StoreModel(
         id: entity.id,
-        name: entity.name,
-        category: entity.category,
-        imageUrl: entity.imageUrl,
-        rating: entity.rating,
-        deliveryTime: entity.deliveryTime,
-        deliveryFee: entity.deliveryFee,
-        description: entity.description,
-        address: entity.address,
-        phone: entity.phone,
-        isOpen: entity.isOpen,
+        nome: entity.name,
+        email: '',
+        ativo: entity.isOpen,
+        cidadeId: entity.cityId,
+        descricao: entity.description,
       );
 }
