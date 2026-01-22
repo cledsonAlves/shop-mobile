@@ -3,17 +3,17 @@ import '../models/models.dart';
 
 class ShopProvider with ChangeNotifier {
   List<Category> _categories = [
-    Category(id: '1', name: 'Games', icon: '🎮'),
-    Category(id: '2', name: 'Construção', icon: '🛠️'),
-    Category(id: '3', name: 'Eletro', icon: '🔌'),
-    Category(id: '4', name: 'Roupas', icon: '👕'),
+    Category(id: '1', name: '', icon: '🎮'),
+    Category(id: '2', name: '', icon: '🛠️'),
+    Category(id: '3', name: '', icon: '🔌'),
+    Category(id: '4', name: '', icon: '👕'),
   ];
 
   List<Store> _stores = [
     Store(
       id: '1',
-      name: 'Padaria do João',
-      category: 'Padaria • Confeitaria • Centro',
+      name: 'Jarinu Games',
+      category: 'GAMES • Eletronicos • Centro',
       imageUrl: 'https://images.unsplash.com/photo-1509440159596-0249088772ff?w=400',
       rating: 4.8,
       deliveryTime: '30-45 min',
@@ -21,7 +21,7 @@ class ShopProvider with ChangeNotifier {
     ),
     Store(
       id: '2',
-      name: 'Loja do Zé',
+      name: 'Ormagil Materias de Construçao',
       category: 'Construção & Reparos',
       imageUrl: 'https://images.unsplash.com/photo-1530124560676-587cad321376?w=400',
       rating: 4.5,

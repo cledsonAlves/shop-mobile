@@ -238,13 +238,17 @@ class _StoreScreenState extends ConsumerState<StoreScreen> {
                   // Lista de produtos
                   productsAsync.when(
                     data: (products) {
-                      final displayProducts = products.isNotEmpty ? products : MockData.products.take(5).toList();
-                      return SliverList(
-                        delegate: SliverChildBuilderDelegate(
-                          (context, index) => _buildProductItem(displayProducts[index]),
-                          childCount: displayProducts.length,
-                        ),
-                      );
+                      final displayProducts = products.isNotEmpty ? products : [];
+                      return displayProducts.isEmpty
+                          ? const SliverToBoxAdapter(
+                              child: Center(child: Text('Nenhum produto disponível')),
+                            )
+                          : SliverList(
+                              delegate: SliverChildBuilderDelegate(
+                                (context, index) => _buildProductItem(displayProducts[index]),
+                                childCount: displayProducts.length,
+                              ),
+                            );
                     },
                     loading: () => const SliverToBoxAdapter(child: Center(child: CircularProgressIndicator())),
                     error: (e, s) => SliverToBoxAdapter(child: Center(child: Text('Erro: $e'))),
@@ -262,10 +266,6 @@ class _StoreScreenState extends ConsumerState<StoreScreen> {
                         ],
                       ),
                     ),
-                  ),
-
-                  SliverToBoxAdapter(
-                    child: _buildProductItem(MockData.products.last),
                   ),
 
                   const SliverToBoxAdapter(child: SizedBox(height: 100)),

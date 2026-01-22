@@ -21,20 +21,30 @@ StoreModel _$StoreModelFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$StoreModel {
   String get id => throw _privateConstructorUsedError;
-  String get name => throw _privateConstructorUsedError;
-  String get category => throw _privateConstructorUsedError;
-  @JsonKey(name: 'image_url')
-  String get imageUrl => throw _privateConstructorUsedError;
-  double get rating => throw _privateConstructorUsedError;
-  @JsonKey(name: 'delivery_time')
-  String get deliveryTime => throw _privateConstructorUsedError;
-  @JsonKey(name: 'delivery_fee')
-  double get deliveryFee => throw _privateConstructorUsedError;
-  String? get description => throw _privateConstructorUsedError;
-  String? get address => throw _privateConstructorUsedError;
-  String? get phone => throw _privateConstructorUsedError;
-  @JsonKey(name: 'is_open')
-  bool get isOpen => throw _privateConstructorUsedError;
+  String get nome => throw _privateConstructorUsedError;
+  String get email => throw _privateConstructorUsedError;
+  @JsonKey(name: 'avatar_url')
+  String? get avatarUrl => throw _privateConstructorUsedError;
+  String? get provider => throw _privateConstructorUsedError;
+  @JsonKey(name: 'cidade_id')
+  String? get cidadeId => throw _privateConstructorUsedError;
+  String? get telefone => throw _privateConstructorUsedError;
+  String? get whatsapp => throw _privateConstructorUsedError;
+  String? get endereco => throw _privateConstructorUsedError;
+  String? get numero => throw _privateConstructorUsedError;
+  String? get complemento => throw _privateConstructorUsedError;
+  String? get bairro => throw _privateConstructorUsedError;
+  String? get cep => throw _privateConstructorUsedError;
+  String? get descricao => throw _privateConstructorUsedError;
+  @JsonKey(name: 'logo_url')
+  String? get logoUrl => throw _privateConstructorUsedError;
+  @JsonKey(name: 'horario_funcionamento')
+  String? get horarioFuncionamento => throw _privateConstructorUsedError;
+  bool get ativo => throw _privateConstructorUsedError;
+  @JsonKey(name: 'criado_em')
+  String? get criadoEm => throw _privateConstructorUsedError;
+  @JsonKey(name: 'atualizado_em')
+  String? get atualizadoEm => throw _privateConstructorUsedError;
 
   /// Serializes this StoreModel to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -54,16 +64,24 @@ abstract class $StoreModelCopyWith<$Res> {
   @useResult
   $Res call(
       {String id,
-      String name,
-      String category,
-      @JsonKey(name: 'image_url') String imageUrl,
-      double rating,
-      @JsonKey(name: 'delivery_time') String deliveryTime,
-      @JsonKey(name: 'delivery_fee') double deliveryFee,
-      String? description,
-      String? address,
-      String? phone,
-      @JsonKey(name: 'is_open') bool isOpen});
+      String nome,
+      String email,
+      @JsonKey(name: 'avatar_url') String? avatarUrl,
+      String? provider,
+      @JsonKey(name: 'cidade_id') String? cidadeId,
+      String? telefone,
+      String? whatsapp,
+      String? endereco,
+      String? numero,
+      String? complemento,
+      String? bairro,
+      String? cep,
+      String? descricao,
+      @JsonKey(name: 'logo_url') String? logoUrl,
+      @JsonKey(name: 'horario_funcionamento') String? horarioFuncionamento,
+      bool ativo,
+      @JsonKey(name: 'criado_em') String? criadoEm,
+      @JsonKey(name: 'atualizado_em') String? atualizadoEm});
 }
 
 /// @nodoc
@@ -82,62 +100,102 @@ class _$StoreModelCopyWithImpl<$Res, $Val extends StoreModel>
   @override
   $Res call({
     Object? id = null,
-    Object? name = null,
-    Object? category = null,
-    Object? imageUrl = null,
-    Object? rating = null,
-    Object? deliveryTime = null,
-    Object? deliveryFee = null,
-    Object? description = freezed,
-    Object? address = freezed,
-    Object? phone = freezed,
-    Object? isOpen = null,
+    Object? nome = null,
+    Object? email = null,
+    Object? avatarUrl = freezed,
+    Object? provider = freezed,
+    Object? cidadeId = freezed,
+    Object? telefone = freezed,
+    Object? whatsapp = freezed,
+    Object? endereco = freezed,
+    Object? numero = freezed,
+    Object? complemento = freezed,
+    Object? bairro = freezed,
+    Object? cep = freezed,
+    Object? descricao = freezed,
+    Object? logoUrl = freezed,
+    Object? horarioFuncionamento = freezed,
+    Object? ativo = null,
+    Object? criadoEm = freezed,
+    Object? atualizadoEm = freezed,
   }) {
     return _then(_value.copyWith(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      name: null == name
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
+      nome: null == nome
+          ? _value.nome
+          : nome // ignore: cast_nullable_to_non_nullable
               as String,
-      category: null == category
-          ? _value.category
-          : category // ignore: cast_nullable_to_non_nullable
+      email: null == email
+          ? _value.email
+          : email // ignore: cast_nullable_to_non_nullable
               as String,
-      imageUrl: null == imageUrl
-          ? _value.imageUrl
-          : imageUrl // ignore: cast_nullable_to_non_nullable
-              as String,
-      rating: null == rating
-          ? _value.rating
-          : rating // ignore: cast_nullable_to_non_nullable
-              as double,
-      deliveryTime: null == deliveryTime
-          ? _value.deliveryTime
-          : deliveryTime // ignore: cast_nullable_to_non_nullable
-              as String,
-      deliveryFee: null == deliveryFee
-          ? _value.deliveryFee
-          : deliveryFee // ignore: cast_nullable_to_non_nullable
-              as double,
-      description: freezed == description
-          ? _value.description
-          : description // ignore: cast_nullable_to_non_nullable
+      avatarUrl: freezed == avatarUrl
+          ? _value.avatarUrl
+          : avatarUrl // ignore: cast_nullable_to_non_nullable
               as String?,
-      address: freezed == address
-          ? _value.address
-          : address // ignore: cast_nullable_to_non_nullable
+      provider: freezed == provider
+          ? _value.provider
+          : provider // ignore: cast_nullable_to_non_nullable
               as String?,
-      phone: freezed == phone
-          ? _value.phone
-          : phone // ignore: cast_nullable_to_non_nullable
+      cidadeId: freezed == cidadeId
+          ? _value.cidadeId
+          : cidadeId // ignore: cast_nullable_to_non_nullable
               as String?,
-      isOpen: null == isOpen
-          ? _value.isOpen
-          : isOpen // ignore: cast_nullable_to_non_nullable
+      telefone: freezed == telefone
+          ? _value.telefone
+          : telefone // ignore: cast_nullable_to_non_nullable
+              as String?,
+      whatsapp: freezed == whatsapp
+          ? _value.whatsapp
+          : whatsapp // ignore: cast_nullable_to_non_nullable
+              as String?,
+      endereco: freezed == endereco
+          ? _value.endereco
+          : endereco // ignore: cast_nullable_to_non_nullable
+              as String?,
+      numero: freezed == numero
+          ? _value.numero
+          : numero // ignore: cast_nullable_to_non_nullable
+              as String?,
+      complemento: freezed == complemento
+          ? _value.complemento
+          : complemento // ignore: cast_nullable_to_non_nullable
+              as String?,
+      bairro: freezed == bairro
+          ? _value.bairro
+          : bairro // ignore: cast_nullable_to_non_nullable
+              as String?,
+      cep: freezed == cep
+          ? _value.cep
+          : cep // ignore: cast_nullable_to_non_nullable
+              as String?,
+      descricao: freezed == descricao
+          ? _value.descricao
+          : descricao // ignore: cast_nullable_to_non_nullable
+              as String?,
+      logoUrl: freezed == logoUrl
+          ? _value.logoUrl
+          : logoUrl // ignore: cast_nullable_to_non_nullable
+              as String?,
+      horarioFuncionamento: freezed == horarioFuncionamento
+          ? _value.horarioFuncionamento
+          : horarioFuncionamento // ignore: cast_nullable_to_non_nullable
+              as String?,
+      ativo: null == ativo
+          ? _value.ativo
+          : ativo // ignore: cast_nullable_to_non_nullable
               as bool,
+      criadoEm: freezed == criadoEm
+          ? _value.criadoEm
+          : criadoEm // ignore: cast_nullable_to_non_nullable
+              as String?,
+      atualizadoEm: freezed == atualizadoEm
+          ? _value.atualizadoEm
+          : atualizadoEm // ignore: cast_nullable_to_non_nullable
+              as String?,
     ) as $Val);
   }
 }
@@ -152,16 +210,24 @@ abstract class _$$StoreModelImplCopyWith<$Res>
   @useResult
   $Res call(
       {String id,
-      String name,
-      String category,
-      @JsonKey(name: 'image_url') String imageUrl,
-      double rating,
-      @JsonKey(name: 'delivery_time') String deliveryTime,
-      @JsonKey(name: 'delivery_fee') double deliveryFee,
-      String? description,
-      String? address,
-      String? phone,
-      @JsonKey(name: 'is_open') bool isOpen});
+      String nome,
+      String email,
+      @JsonKey(name: 'avatar_url') String? avatarUrl,
+      String? provider,
+      @JsonKey(name: 'cidade_id') String? cidadeId,
+      String? telefone,
+      String? whatsapp,
+      String? endereco,
+      String? numero,
+      String? complemento,
+      String? bairro,
+      String? cep,
+      String? descricao,
+      @JsonKey(name: 'logo_url') String? logoUrl,
+      @JsonKey(name: 'horario_funcionamento') String? horarioFuncionamento,
+      bool ativo,
+      @JsonKey(name: 'criado_em') String? criadoEm,
+      @JsonKey(name: 'atualizado_em') String? atualizadoEm});
 }
 
 /// @nodoc
@@ -178,62 +244,102 @@ class __$$StoreModelImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = null,
-    Object? name = null,
-    Object? category = null,
-    Object? imageUrl = null,
-    Object? rating = null,
-    Object? deliveryTime = null,
-    Object? deliveryFee = null,
-    Object? description = freezed,
-    Object? address = freezed,
-    Object? phone = freezed,
-    Object? isOpen = null,
+    Object? nome = null,
+    Object? email = null,
+    Object? avatarUrl = freezed,
+    Object? provider = freezed,
+    Object? cidadeId = freezed,
+    Object? telefone = freezed,
+    Object? whatsapp = freezed,
+    Object? endereco = freezed,
+    Object? numero = freezed,
+    Object? complemento = freezed,
+    Object? bairro = freezed,
+    Object? cep = freezed,
+    Object? descricao = freezed,
+    Object? logoUrl = freezed,
+    Object? horarioFuncionamento = freezed,
+    Object? ativo = null,
+    Object? criadoEm = freezed,
+    Object? atualizadoEm = freezed,
   }) {
     return _then(_$StoreModelImpl(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      name: null == name
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
+      nome: null == nome
+          ? _value.nome
+          : nome // ignore: cast_nullable_to_non_nullable
               as String,
-      category: null == category
-          ? _value.category
-          : category // ignore: cast_nullable_to_non_nullable
+      email: null == email
+          ? _value.email
+          : email // ignore: cast_nullable_to_non_nullable
               as String,
-      imageUrl: null == imageUrl
-          ? _value.imageUrl
-          : imageUrl // ignore: cast_nullable_to_non_nullable
-              as String,
-      rating: null == rating
-          ? _value.rating
-          : rating // ignore: cast_nullable_to_non_nullable
-              as double,
-      deliveryTime: null == deliveryTime
-          ? _value.deliveryTime
-          : deliveryTime // ignore: cast_nullable_to_non_nullable
-              as String,
-      deliveryFee: null == deliveryFee
-          ? _value.deliveryFee
-          : deliveryFee // ignore: cast_nullable_to_non_nullable
-              as double,
-      description: freezed == description
-          ? _value.description
-          : description // ignore: cast_nullable_to_non_nullable
+      avatarUrl: freezed == avatarUrl
+          ? _value.avatarUrl
+          : avatarUrl // ignore: cast_nullable_to_non_nullable
               as String?,
-      address: freezed == address
-          ? _value.address
-          : address // ignore: cast_nullable_to_non_nullable
+      provider: freezed == provider
+          ? _value.provider
+          : provider // ignore: cast_nullable_to_non_nullable
               as String?,
-      phone: freezed == phone
-          ? _value.phone
-          : phone // ignore: cast_nullable_to_non_nullable
+      cidadeId: freezed == cidadeId
+          ? _value.cidadeId
+          : cidadeId // ignore: cast_nullable_to_non_nullable
               as String?,
-      isOpen: null == isOpen
-          ? _value.isOpen
-          : isOpen // ignore: cast_nullable_to_non_nullable
+      telefone: freezed == telefone
+          ? _value.telefone
+          : telefone // ignore: cast_nullable_to_non_nullable
+              as String?,
+      whatsapp: freezed == whatsapp
+          ? _value.whatsapp
+          : whatsapp // ignore: cast_nullable_to_non_nullable
+              as String?,
+      endereco: freezed == endereco
+          ? _value.endereco
+          : endereco // ignore: cast_nullable_to_non_nullable
+              as String?,
+      numero: freezed == numero
+          ? _value.numero
+          : numero // ignore: cast_nullable_to_non_nullable
+              as String?,
+      complemento: freezed == complemento
+          ? _value.complemento
+          : complemento // ignore: cast_nullable_to_non_nullable
+              as String?,
+      bairro: freezed == bairro
+          ? _value.bairro
+          : bairro // ignore: cast_nullable_to_non_nullable
+              as String?,
+      cep: freezed == cep
+          ? _value.cep
+          : cep // ignore: cast_nullable_to_non_nullable
+              as String?,
+      descricao: freezed == descricao
+          ? _value.descricao
+          : descricao // ignore: cast_nullable_to_non_nullable
+              as String?,
+      logoUrl: freezed == logoUrl
+          ? _value.logoUrl
+          : logoUrl // ignore: cast_nullable_to_non_nullable
+              as String?,
+      horarioFuncionamento: freezed == horarioFuncionamento
+          ? _value.horarioFuncionamento
+          : horarioFuncionamento // ignore: cast_nullable_to_non_nullable
+              as String?,
+      ativo: null == ativo
+          ? _value.ativo
+          : ativo // ignore: cast_nullable_to_non_nullable
               as bool,
+      criadoEm: freezed == criadoEm
+          ? _value.criadoEm
+          : criadoEm // ignore: cast_nullable_to_non_nullable
+              as String?,
+      atualizadoEm: freezed == atualizadoEm
+          ? _value.atualizadoEm
+          : atualizadoEm // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -243,16 +349,24 @@ class __$$StoreModelImplCopyWithImpl<$Res>
 class _$StoreModelImpl extends _StoreModel {
   const _$StoreModelImpl(
       {required this.id,
-      required this.name,
-      required this.category,
-      @JsonKey(name: 'image_url') required this.imageUrl,
-      required this.rating,
-      @JsonKey(name: 'delivery_time') required this.deliveryTime,
-      @JsonKey(name: 'delivery_fee') required this.deliveryFee,
-      this.description,
-      this.address,
-      this.phone,
-      @JsonKey(name: 'is_open') this.isOpen = true})
+      required this.nome,
+      required this.email,
+      @JsonKey(name: 'avatar_url') this.avatarUrl,
+      this.provider,
+      @JsonKey(name: 'cidade_id') this.cidadeId,
+      this.telefone,
+      this.whatsapp,
+      this.endereco,
+      this.numero,
+      this.complemento,
+      this.bairro,
+      this.cep,
+      this.descricao,
+      @JsonKey(name: 'logo_url') this.logoUrl,
+      @JsonKey(name: 'horario_funcionamento') this.horarioFuncionamento,
+      this.ativo = true,
+      @JsonKey(name: 'criado_em') this.criadoEm,
+      @JsonKey(name: 'atualizado_em') this.atualizadoEm})
       : super._();
 
   factory _$StoreModelImpl.fromJson(Map<String, dynamic> json) =>
@@ -261,33 +375,52 @@ class _$StoreModelImpl extends _StoreModel {
   @override
   final String id;
   @override
-  final String name;
+  final String nome;
   @override
-  final String category;
+  final String email;
   @override
-  @JsonKey(name: 'image_url')
-  final String imageUrl;
+  @JsonKey(name: 'avatar_url')
+  final String? avatarUrl;
   @override
-  final double rating;
+  final String? provider;
   @override
-  @JsonKey(name: 'delivery_time')
-  final String deliveryTime;
+  @JsonKey(name: 'cidade_id')
+  final String? cidadeId;
   @override
-  @JsonKey(name: 'delivery_fee')
-  final double deliveryFee;
+  final String? telefone;
   @override
-  final String? description;
+  final String? whatsapp;
   @override
-  final String? address;
+  final String? endereco;
   @override
-  final String? phone;
+  final String? numero;
   @override
-  @JsonKey(name: 'is_open')
-  final bool isOpen;
+  final String? complemento;
+  @override
+  final String? bairro;
+  @override
+  final String? cep;
+  @override
+  final String? descricao;
+  @override
+  @JsonKey(name: 'logo_url')
+  final String? logoUrl;
+  @override
+  @JsonKey(name: 'horario_funcionamento')
+  final String? horarioFuncionamento;
+  @override
+  @JsonKey()
+  final bool ativo;
+  @override
+  @JsonKey(name: 'criado_em')
+  final String? criadoEm;
+  @override
+  @JsonKey(name: 'atualizado_em')
+  final String? atualizadoEm;
 
   @override
   String toString() {
-    return 'StoreModel(id: $id, name: $name, category: $category, imageUrl: $imageUrl, rating: $rating, deliveryTime: $deliveryTime, deliveryFee: $deliveryFee, description: $description, address: $address, phone: $phone, isOpen: $isOpen)';
+    return 'StoreModel(id: $id, nome: $nome, email: $email, avatarUrl: $avatarUrl, provider: $provider, cidadeId: $cidadeId, telefone: $telefone, whatsapp: $whatsapp, endereco: $endereco, numero: $numero, complemento: $complemento, bairro: $bairro, cep: $cep, descricao: $descricao, logoUrl: $logoUrl, horarioFuncionamento: $horarioFuncionamento, ativo: $ativo, criadoEm: $criadoEm, atualizadoEm: $atualizadoEm)';
   }
 
   @override
@@ -296,27 +429,61 @@ class _$StoreModelImpl extends _StoreModel {
         (other.runtimeType == runtimeType &&
             other is _$StoreModelImpl &&
             (identical(other.id, id) || other.id == id) &&
-            (identical(other.name, name) || other.name == name) &&
-            (identical(other.category, category) ||
-                other.category == category) &&
-            (identical(other.imageUrl, imageUrl) ||
-                other.imageUrl == imageUrl) &&
-            (identical(other.rating, rating) || other.rating == rating) &&
-            (identical(other.deliveryTime, deliveryTime) ||
-                other.deliveryTime == deliveryTime) &&
-            (identical(other.deliveryFee, deliveryFee) ||
-                other.deliveryFee == deliveryFee) &&
-            (identical(other.description, description) ||
-                other.description == description) &&
-            (identical(other.address, address) || other.address == address) &&
-            (identical(other.phone, phone) || other.phone == phone) &&
-            (identical(other.isOpen, isOpen) || other.isOpen == isOpen));
+            (identical(other.nome, nome) || other.nome == nome) &&
+            (identical(other.email, email) || other.email == email) &&
+            (identical(other.avatarUrl, avatarUrl) ||
+                other.avatarUrl == avatarUrl) &&
+            (identical(other.provider, provider) ||
+                other.provider == provider) &&
+            (identical(other.cidadeId, cidadeId) ||
+                other.cidadeId == cidadeId) &&
+            (identical(other.telefone, telefone) ||
+                other.telefone == telefone) &&
+            (identical(other.whatsapp, whatsapp) ||
+                other.whatsapp == whatsapp) &&
+            (identical(other.endereco, endereco) ||
+                other.endereco == endereco) &&
+            (identical(other.numero, numero) || other.numero == numero) &&
+            (identical(other.complemento, complemento) ||
+                other.complemento == complemento) &&
+            (identical(other.bairro, bairro) || other.bairro == bairro) &&
+            (identical(other.cep, cep) || other.cep == cep) &&
+            (identical(other.descricao, descricao) ||
+                other.descricao == descricao) &&
+            (identical(other.logoUrl, logoUrl) || other.logoUrl == logoUrl) &&
+            (identical(other.horarioFuncionamento, horarioFuncionamento) ||
+                other.horarioFuncionamento == horarioFuncionamento) &&
+            (identical(other.ativo, ativo) || other.ativo == ativo) &&
+            (identical(other.criadoEm, criadoEm) ||
+                other.criadoEm == criadoEm) &&
+            (identical(other.atualizadoEm, atualizadoEm) ||
+                other.atualizadoEm == atualizadoEm));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, id, name, category, imageUrl,
-      rating, deliveryTime, deliveryFee, description, address, phone, isOpen);
+  int get hashCode => Object.hashAll([
+        runtimeType,
+        id,
+        nome,
+        email,
+        avatarUrl,
+        provider,
+        cidadeId,
+        telefone,
+        whatsapp,
+        endereco,
+        numero,
+        complemento,
+        bairro,
+        cep,
+        descricao,
+        logoUrl,
+        horarioFuncionamento,
+        ativo,
+        criadoEm,
+        atualizadoEm
+      ]);
 
   /// Create a copy of StoreModel
   /// with the given fields replaced by the non-null parameter values.
@@ -336,17 +503,27 @@ class _$StoreModelImpl extends _StoreModel {
 
 abstract class _StoreModel extends StoreModel {
   const factory _StoreModel(
-      {required final String id,
-      required final String name,
-      required final String category,
-      @JsonKey(name: 'image_url') required final String imageUrl,
-      required final double rating,
-      @JsonKey(name: 'delivery_time') required final String deliveryTime,
-      @JsonKey(name: 'delivery_fee') required final double deliveryFee,
-      final String? description,
-      final String? address,
-      final String? phone,
-      @JsonKey(name: 'is_open') final bool isOpen}) = _$StoreModelImpl;
+          {required final String id,
+          required final String nome,
+          required final String email,
+          @JsonKey(name: 'avatar_url') final String? avatarUrl,
+          final String? provider,
+          @JsonKey(name: 'cidade_id') final String? cidadeId,
+          final String? telefone,
+          final String? whatsapp,
+          final String? endereco,
+          final String? numero,
+          final String? complemento,
+          final String? bairro,
+          final String? cep,
+          final String? descricao,
+          @JsonKey(name: 'logo_url') final String? logoUrl,
+          @JsonKey(name: 'horario_funcionamento')
+          final String? horarioFuncionamento,
+          final bool ativo,
+          @JsonKey(name: 'criado_em') final String? criadoEm,
+          @JsonKey(name: 'atualizado_em') final String? atualizadoEm}) =
+      _$StoreModelImpl;
   const _StoreModel._() : super._();
 
   factory _StoreModel.fromJson(Map<String, dynamic> json) =
@@ -355,29 +532,47 @@ abstract class _StoreModel extends StoreModel {
   @override
   String get id;
   @override
-  String get name;
+  String get nome;
   @override
-  String get category;
+  String get email;
   @override
-  @JsonKey(name: 'image_url')
-  String get imageUrl;
+  @JsonKey(name: 'avatar_url')
+  String? get avatarUrl;
   @override
-  double get rating;
+  String? get provider;
   @override
-  @JsonKey(name: 'delivery_time')
-  String get deliveryTime;
+  @JsonKey(name: 'cidade_id')
+  String? get cidadeId;
   @override
-  @JsonKey(name: 'delivery_fee')
-  double get deliveryFee;
+  String? get telefone;
   @override
-  String? get description;
+  String? get whatsapp;
   @override
-  String? get address;
+  String? get endereco;
   @override
-  String? get phone;
+  String? get numero;
   @override
-  @JsonKey(name: 'is_open')
-  bool get isOpen;
+  String? get complemento;
+  @override
+  String? get bairro;
+  @override
+  String? get cep;
+  @override
+  String? get descricao;
+  @override
+  @JsonKey(name: 'logo_url')
+  String? get logoUrl;
+  @override
+  @JsonKey(name: 'horario_funcionamento')
+  String? get horarioFuncionamento;
+  @override
+  bool get ativo;
+  @override
+  @JsonKey(name: 'criado_em')
+  String? get criadoEm;
+  @override
+  @JsonKey(name: 'atualizado_em')
+  String? get atualizadoEm;
 
   /// Create a copy of StoreModel
   /// with the given fields replaced by the non-null parameter values.

@@ -14,189 +14,413 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
-OrderItemModel _$OrderItemModelFromJson(Map<String, dynamic> json) {
-  return _OrderItemModel.fromJson(json);
+OrderCreateModel _$OrderCreateModelFromJson(Map<String, dynamic> json) {
+  return _OrderCreateModel.fromJson(json);
 }
 
 /// @nodoc
-mixin _$OrderItemModel {
-  ProductModel get product => throw _privateConstructorUsedError;
-  int get quantity => throw _privateConstructorUsedError;
+mixin _$OrderCreateModel {
+  @JsonKey(name: 'cliente_id')
+  String get clienteId => throw _privateConstructorUsedError;
+  @JsonKey(name: 'lojista_id')
+  String get lojistaId => throw _privateConstructorUsedError;
+  @JsonKey(name: 'endereco_entrega')
+  String? get enderecoEntrega => throw _privateConstructorUsedError;
+  @JsonKey(name: 'cidade_entrega')
+  String? get cidadeEntrega => throw _privateConstructorUsedError;
+  @JsonKey(name: 'estado_entrega')
+  String? get estadoEntrega => throw _privateConstructorUsedError;
+  @JsonKey(name: 'cep_entrega')
+  String? get cepEntrega => throw _privateConstructorUsedError;
+  @JsonKey(name: 'forma_pagamento')
+  String? get formaPagamento => throw _privateConstructorUsedError;
+  String? get observacoes => throw _privateConstructorUsedError;
+  @JsonKey(name: 'taxa_entrega')
+  double get taxaEntrega => throw _privateConstructorUsedError;
+  double get desconto => throw _privateConstructorUsedError;
+  List<OrderItemCreateModel> get itens => throw _privateConstructorUsedError;
 
-  /// Serializes this OrderItemModel to a JSON map.
+  /// Serializes this OrderCreateModel to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
 
-  /// Create a copy of OrderItemModel
+  /// Create a copy of OrderCreateModel
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  $OrderItemModelCopyWith<OrderItemModel> get copyWith =>
+  $OrderCreateModelCopyWith<OrderCreateModel> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $OrderItemModelCopyWith<$Res> {
-  factory $OrderItemModelCopyWith(
-          OrderItemModel value, $Res Function(OrderItemModel) then) =
-      _$OrderItemModelCopyWithImpl<$Res, OrderItemModel>;
+abstract class $OrderCreateModelCopyWith<$Res> {
+  factory $OrderCreateModelCopyWith(
+          OrderCreateModel value, $Res Function(OrderCreateModel) then) =
+      _$OrderCreateModelCopyWithImpl<$Res, OrderCreateModel>;
   @useResult
-  $Res call({ProductModel product, int quantity});
-
-  $ProductModelCopyWith<$Res> get product;
+  $Res call(
+      {@JsonKey(name: 'cliente_id') String clienteId,
+      @JsonKey(name: 'lojista_id') String lojistaId,
+      @JsonKey(name: 'endereco_entrega') String? enderecoEntrega,
+      @JsonKey(name: 'cidade_entrega') String? cidadeEntrega,
+      @JsonKey(name: 'estado_entrega') String? estadoEntrega,
+      @JsonKey(name: 'cep_entrega') String? cepEntrega,
+      @JsonKey(name: 'forma_pagamento') String? formaPagamento,
+      String? observacoes,
+      @JsonKey(name: 'taxa_entrega') double taxaEntrega,
+      double desconto,
+      List<OrderItemCreateModel> itens});
 }
 
 /// @nodoc
-class _$OrderItemModelCopyWithImpl<$Res, $Val extends OrderItemModel>
-    implements $OrderItemModelCopyWith<$Res> {
-  _$OrderItemModelCopyWithImpl(this._value, this._then);
+class _$OrderCreateModelCopyWithImpl<$Res, $Val extends OrderCreateModel>
+    implements $OrderCreateModelCopyWith<$Res> {
+  _$OrderCreateModelCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of OrderItemModel
+  /// Create a copy of OrderCreateModel
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? product = null,
-    Object? quantity = null,
+    Object? clienteId = null,
+    Object? lojistaId = null,
+    Object? enderecoEntrega = freezed,
+    Object? cidadeEntrega = freezed,
+    Object? estadoEntrega = freezed,
+    Object? cepEntrega = freezed,
+    Object? formaPagamento = freezed,
+    Object? observacoes = freezed,
+    Object? taxaEntrega = null,
+    Object? desconto = null,
+    Object? itens = null,
   }) {
     return _then(_value.copyWith(
-      product: null == product
-          ? _value.product
-          : product // ignore: cast_nullable_to_non_nullable
-              as ProductModel,
-      quantity: null == quantity
-          ? _value.quantity
-          : quantity // ignore: cast_nullable_to_non_nullable
-              as int,
+      clienteId: null == clienteId
+          ? _value.clienteId
+          : clienteId // ignore: cast_nullable_to_non_nullable
+              as String,
+      lojistaId: null == lojistaId
+          ? _value.lojistaId
+          : lojistaId // ignore: cast_nullable_to_non_nullable
+              as String,
+      enderecoEntrega: freezed == enderecoEntrega
+          ? _value.enderecoEntrega
+          : enderecoEntrega // ignore: cast_nullable_to_non_nullable
+              as String?,
+      cidadeEntrega: freezed == cidadeEntrega
+          ? _value.cidadeEntrega
+          : cidadeEntrega // ignore: cast_nullable_to_non_nullable
+              as String?,
+      estadoEntrega: freezed == estadoEntrega
+          ? _value.estadoEntrega
+          : estadoEntrega // ignore: cast_nullable_to_non_nullable
+              as String?,
+      cepEntrega: freezed == cepEntrega
+          ? _value.cepEntrega
+          : cepEntrega // ignore: cast_nullable_to_non_nullable
+              as String?,
+      formaPagamento: freezed == formaPagamento
+          ? _value.formaPagamento
+          : formaPagamento // ignore: cast_nullable_to_non_nullable
+              as String?,
+      observacoes: freezed == observacoes
+          ? _value.observacoes
+          : observacoes // ignore: cast_nullable_to_non_nullable
+              as String?,
+      taxaEntrega: null == taxaEntrega
+          ? _value.taxaEntrega
+          : taxaEntrega // ignore: cast_nullable_to_non_nullable
+              as double,
+      desconto: null == desconto
+          ? _value.desconto
+          : desconto // ignore: cast_nullable_to_non_nullable
+              as double,
+      itens: null == itens
+          ? _value.itens
+          : itens // ignore: cast_nullable_to_non_nullable
+              as List<OrderItemCreateModel>,
     ) as $Val);
   }
-
-  /// Create a copy of OrderItemModel
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @pragma('vm:prefer-inline')
-  $ProductModelCopyWith<$Res> get product {
-    return $ProductModelCopyWith<$Res>(_value.product, (value) {
-      return _then(_value.copyWith(product: value) as $Val);
-    });
-  }
 }
 
 /// @nodoc
-abstract class _$$OrderItemModelImplCopyWith<$Res>
-    implements $OrderItemModelCopyWith<$Res> {
-  factory _$$OrderItemModelImplCopyWith(_$OrderItemModelImpl value,
-          $Res Function(_$OrderItemModelImpl) then) =
-      __$$OrderItemModelImplCopyWithImpl<$Res>;
+abstract class _$$OrderCreateModelImplCopyWith<$Res>
+    implements $OrderCreateModelCopyWith<$Res> {
+  factory _$$OrderCreateModelImplCopyWith(_$OrderCreateModelImpl value,
+          $Res Function(_$OrderCreateModelImpl) then) =
+      __$$OrderCreateModelImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({ProductModel product, int quantity});
-
-  @override
-  $ProductModelCopyWith<$Res> get product;
+  $Res call(
+      {@JsonKey(name: 'cliente_id') String clienteId,
+      @JsonKey(name: 'lojista_id') String lojistaId,
+      @JsonKey(name: 'endereco_entrega') String? enderecoEntrega,
+      @JsonKey(name: 'cidade_entrega') String? cidadeEntrega,
+      @JsonKey(name: 'estado_entrega') String? estadoEntrega,
+      @JsonKey(name: 'cep_entrega') String? cepEntrega,
+      @JsonKey(name: 'forma_pagamento') String? formaPagamento,
+      String? observacoes,
+      @JsonKey(name: 'taxa_entrega') double taxaEntrega,
+      double desconto,
+      List<OrderItemCreateModel> itens});
 }
 
 /// @nodoc
-class __$$OrderItemModelImplCopyWithImpl<$Res>
-    extends _$OrderItemModelCopyWithImpl<$Res, _$OrderItemModelImpl>
-    implements _$$OrderItemModelImplCopyWith<$Res> {
-  __$$OrderItemModelImplCopyWithImpl(
-      _$OrderItemModelImpl _value, $Res Function(_$OrderItemModelImpl) _then)
+class __$$OrderCreateModelImplCopyWithImpl<$Res>
+    extends _$OrderCreateModelCopyWithImpl<$Res, _$OrderCreateModelImpl>
+    implements _$$OrderCreateModelImplCopyWith<$Res> {
+  __$$OrderCreateModelImplCopyWithImpl(_$OrderCreateModelImpl _value,
+      $Res Function(_$OrderCreateModelImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of OrderItemModel
+  /// Create a copy of OrderCreateModel
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? product = null,
-    Object? quantity = null,
+    Object? clienteId = null,
+    Object? lojistaId = null,
+    Object? enderecoEntrega = freezed,
+    Object? cidadeEntrega = freezed,
+    Object? estadoEntrega = freezed,
+    Object? cepEntrega = freezed,
+    Object? formaPagamento = freezed,
+    Object? observacoes = freezed,
+    Object? taxaEntrega = null,
+    Object? desconto = null,
+    Object? itens = null,
   }) {
-    return _then(_$OrderItemModelImpl(
-      product: null == product
-          ? _value.product
-          : product // ignore: cast_nullable_to_non_nullable
-              as ProductModel,
-      quantity: null == quantity
-          ? _value.quantity
-          : quantity // ignore: cast_nullable_to_non_nullable
-              as int,
+    return _then(_$OrderCreateModelImpl(
+      clienteId: null == clienteId
+          ? _value.clienteId
+          : clienteId // ignore: cast_nullable_to_non_nullable
+              as String,
+      lojistaId: null == lojistaId
+          ? _value.lojistaId
+          : lojistaId // ignore: cast_nullable_to_non_nullable
+              as String,
+      enderecoEntrega: freezed == enderecoEntrega
+          ? _value.enderecoEntrega
+          : enderecoEntrega // ignore: cast_nullable_to_non_nullable
+              as String?,
+      cidadeEntrega: freezed == cidadeEntrega
+          ? _value.cidadeEntrega
+          : cidadeEntrega // ignore: cast_nullable_to_non_nullable
+              as String?,
+      estadoEntrega: freezed == estadoEntrega
+          ? _value.estadoEntrega
+          : estadoEntrega // ignore: cast_nullable_to_non_nullable
+              as String?,
+      cepEntrega: freezed == cepEntrega
+          ? _value.cepEntrega
+          : cepEntrega // ignore: cast_nullable_to_non_nullable
+              as String?,
+      formaPagamento: freezed == formaPagamento
+          ? _value.formaPagamento
+          : formaPagamento // ignore: cast_nullable_to_non_nullable
+              as String?,
+      observacoes: freezed == observacoes
+          ? _value.observacoes
+          : observacoes // ignore: cast_nullable_to_non_nullable
+              as String?,
+      taxaEntrega: null == taxaEntrega
+          ? _value.taxaEntrega
+          : taxaEntrega // ignore: cast_nullable_to_non_nullable
+              as double,
+      desconto: null == desconto
+          ? _value.desconto
+          : desconto // ignore: cast_nullable_to_non_nullable
+              as double,
+      itens: null == itens
+          ? _value._itens
+          : itens // ignore: cast_nullable_to_non_nullable
+              as List<OrderItemCreateModel>,
     ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
-class _$OrderItemModelImpl extends _OrderItemModel {
-  const _$OrderItemModelImpl({required this.product, required this.quantity})
-      : super._();
+class _$OrderCreateModelImpl extends _OrderCreateModel {
+  const _$OrderCreateModelImpl(
+      {@JsonKey(name: 'cliente_id') required this.clienteId,
+      @JsonKey(name: 'lojista_id') required this.lojistaId,
+      @JsonKey(name: 'endereco_entrega') this.enderecoEntrega,
+      @JsonKey(name: 'cidade_entrega') this.cidadeEntrega,
+      @JsonKey(name: 'estado_entrega') this.estadoEntrega,
+      @JsonKey(name: 'cep_entrega') this.cepEntrega,
+      @JsonKey(name: 'forma_pagamento') this.formaPagamento,
+      this.observacoes,
+      @JsonKey(name: 'taxa_entrega') this.taxaEntrega = 0,
+      this.desconto = 0,
+      required final List<OrderItemCreateModel> itens})
+      : _itens = itens,
+        super._();
 
-  factory _$OrderItemModelImpl.fromJson(Map<String, dynamic> json) =>
-      _$$OrderItemModelImplFromJson(json);
+  factory _$OrderCreateModelImpl.fromJson(Map<String, dynamic> json) =>
+      _$$OrderCreateModelImplFromJson(json);
 
   @override
-  final ProductModel product;
+  @JsonKey(name: 'cliente_id')
+  final String clienteId;
   @override
-  final int quantity;
+  @JsonKey(name: 'lojista_id')
+  final String lojistaId;
+  @override
+  @JsonKey(name: 'endereco_entrega')
+  final String? enderecoEntrega;
+  @override
+  @JsonKey(name: 'cidade_entrega')
+  final String? cidadeEntrega;
+  @override
+  @JsonKey(name: 'estado_entrega')
+  final String? estadoEntrega;
+  @override
+  @JsonKey(name: 'cep_entrega')
+  final String? cepEntrega;
+  @override
+  @JsonKey(name: 'forma_pagamento')
+  final String? formaPagamento;
+  @override
+  final String? observacoes;
+  @override
+  @JsonKey(name: 'taxa_entrega')
+  final double taxaEntrega;
+  @override
+  @JsonKey()
+  final double desconto;
+  final List<OrderItemCreateModel> _itens;
+  @override
+  List<OrderItemCreateModel> get itens {
+    if (_itens is EqualUnmodifiableListView) return _itens;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_itens);
+  }
 
   @override
   String toString() {
-    return 'OrderItemModel(product: $product, quantity: $quantity)';
+    return 'OrderCreateModel(clienteId: $clienteId, lojistaId: $lojistaId, enderecoEntrega: $enderecoEntrega, cidadeEntrega: $cidadeEntrega, estadoEntrega: $estadoEntrega, cepEntrega: $cepEntrega, formaPagamento: $formaPagamento, observacoes: $observacoes, taxaEntrega: $taxaEntrega, desconto: $desconto, itens: $itens)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$OrderItemModelImpl &&
-            (identical(other.product, product) || other.product == product) &&
-            (identical(other.quantity, quantity) ||
-                other.quantity == quantity));
+            other is _$OrderCreateModelImpl &&
+            (identical(other.clienteId, clienteId) ||
+                other.clienteId == clienteId) &&
+            (identical(other.lojistaId, lojistaId) ||
+                other.lojistaId == lojistaId) &&
+            (identical(other.enderecoEntrega, enderecoEntrega) ||
+                other.enderecoEntrega == enderecoEntrega) &&
+            (identical(other.cidadeEntrega, cidadeEntrega) ||
+                other.cidadeEntrega == cidadeEntrega) &&
+            (identical(other.estadoEntrega, estadoEntrega) ||
+                other.estadoEntrega == estadoEntrega) &&
+            (identical(other.cepEntrega, cepEntrega) ||
+                other.cepEntrega == cepEntrega) &&
+            (identical(other.formaPagamento, formaPagamento) ||
+                other.formaPagamento == formaPagamento) &&
+            (identical(other.observacoes, observacoes) ||
+                other.observacoes == observacoes) &&
+            (identical(other.taxaEntrega, taxaEntrega) ||
+                other.taxaEntrega == taxaEntrega) &&
+            (identical(other.desconto, desconto) ||
+                other.desconto == desconto) &&
+            const DeepCollectionEquality().equals(other._itens, _itens));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, product, quantity);
+  int get hashCode => Object.hash(
+      runtimeType,
+      clienteId,
+      lojistaId,
+      enderecoEntrega,
+      cidadeEntrega,
+      estadoEntrega,
+      cepEntrega,
+      formaPagamento,
+      observacoes,
+      taxaEntrega,
+      desconto,
+      const DeepCollectionEquality().hash(_itens));
 
-  /// Create a copy of OrderItemModel
+  /// Create a copy of OrderCreateModel
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$OrderItemModelImplCopyWith<_$OrderItemModelImpl> get copyWith =>
-      __$$OrderItemModelImplCopyWithImpl<_$OrderItemModelImpl>(
+  _$$OrderCreateModelImplCopyWith<_$OrderCreateModelImpl> get copyWith =>
+      __$$OrderCreateModelImplCopyWithImpl<_$OrderCreateModelImpl>(
           this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$OrderItemModelImplToJson(
+    return _$$OrderCreateModelImplToJson(
       this,
     );
   }
 }
 
-abstract class _OrderItemModel extends OrderItemModel {
-  const factory _OrderItemModel(
-      {required final ProductModel product,
-      required final int quantity}) = _$OrderItemModelImpl;
-  const _OrderItemModel._() : super._();
+abstract class _OrderCreateModel extends OrderCreateModel {
+  const factory _OrderCreateModel(
+          {@JsonKey(name: 'cliente_id') required final String clienteId,
+          @JsonKey(name: 'lojista_id') required final String lojistaId,
+          @JsonKey(name: 'endereco_entrega') final String? enderecoEntrega,
+          @JsonKey(name: 'cidade_entrega') final String? cidadeEntrega,
+          @JsonKey(name: 'estado_entrega') final String? estadoEntrega,
+          @JsonKey(name: 'cep_entrega') final String? cepEntrega,
+          @JsonKey(name: 'forma_pagamento') final String? formaPagamento,
+          final String? observacoes,
+          @JsonKey(name: 'taxa_entrega') final double taxaEntrega,
+          final double desconto,
+          required final List<OrderItemCreateModel> itens}) =
+      _$OrderCreateModelImpl;
+  const _OrderCreateModel._() : super._();
 
-  factory _OrderItemModel.fromJson(Map<String, dynamic> json) =
-      _$OrderItemModelImpl.fromJson;
+  factory _OrderCreateModel.fromJson(Map<String, dynamic> json) =
+      _$OrderCreateModelImpl.fromJson;
 
   @override
-  ProductModel get product;
+  @JsonKey(name: 'cliente_id')
+  String get clienteId;
   @override
-  int get quantity;
+  @JsonKey(name: 'lojista_id')
+  String get lojistaId;
+  @override
+  @JsonKey(name: 'endereco_entrega')
+  String? get enderecoEntrega;
+  @override
+  @JsonKey(name: 'cidade_entrega')
+  String? get cidadeEntrega;
+  @override
+  @JsonKey(name: 'estado_entrega')
+  String? get estadoEntrega;
+  @override
+  @JsonKey(name: 'cep_entrega')
+  String? get cepEntrega;
+  @override
+  @JsonKey(name: 'forma_pagamento')
+  String? get formaPagamento;
+  @override
+  String? get observacoes;
+  @override
+  @JsonKey(name: 'taxa_entrega')
+  double get taxaEntrega;
+  @override
+  double get desconto;
+  @override
+  List<OrderItemCreateModel> get itens;
 
-  /// Create a copy of OrderItemModel
+  /// Create a copy of OrderCreateModel
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$OrderItemModelImplCopyWith<_$OrderItemModelImpl> get copyWith =>
+  _$$OrderCreateModelImplCopyWith<_$OrderCreateModelImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -207,19 +431,36 @@ OrderModel _$OrderModelFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$OrderModel {
   String get id => throw _privateConstructorUsedError;
-  List<OrderItemModel> get items => throw _privateConstructorUsedError;
-  double get total => throw _privateConstructorUsedError;
-  OrderStatus get status => throw _privateConstructorUsedError;
-  @JsonKey(name: 'created_at')
-  DateTime get createdAt => throw _privateConstructorUsedError;
-  @JsonKey(name: 'store_id')
-  String? get storeId => throw _privateConstructorUsedError;
-  @JsonKey(name: 'store_name')
-  String? get storeName => throw _privateConstructorUsedError;
-  @JsonKey(name: 'delivery_address')
-  String? get deliveryAddress => throw _privateConstructorUsedError;
-  @JsonKey(name: 'estimated_delivery')
-  DateTime? get estimatedDelivery => throw _privateConstructorUsedError;
+  @JsonKey(name: 'cliente_id')
+  String get clienteId => throw _privateConstructorUsedError;
+  @JsonKey(name: 'lojista_id')
+  String get lojistaId => throw _privateConstructorUsedError;
+  @JsonKey(name: 'nome_lojista')
+  String? get nomeLojista => throw _privateConstructorUsedError;
+  @JsonKey(name: 'endereco_entrega')
+  String? get enderecoEntrega => throw _privateConstructorUsedError;
+  @JsonKey(name: 'cidade_entrega')
+  String? get cidadeEntrega => throw _privateConstructorUsedError;
+  @JsonKey(name: 'estado_entrega')
+  String? get estadoEntrega => throw _privateConstructorUsedError;
+  @JsonKey(name: 'cep_entrega')
+  String? get cepEntrega => throw _privateConstructorUsedError;
+  @JsonKey(name: 'forma_pagamento')
+  String? get formaPagamento => throw _privateConstructorUsedError;
+  String? get observacoes => throw _privateConstructorUsedError;
+  String get subtotal => throw _privateConstructorUsedError;
+  @JsonKey(name: 'taxa_entrega')
+  String get taxaEntrega => throw _privateConstructorUsedError;
+  String get desconto => throw _privateConstructorUsedError;
+  String get total => throw _privateConstructorUsedError;
+  String get status => throw _privateConstructorUsedError;
+  @JsonKey(name: 'codigo_confirmacao')
+  String? get codigoConfirmacao => throw _privateConstructorUsedError;
+  List<OrderItemResponseModel> get itens => throw _privateConstructorUsedError;
+  @JsonKey(name: 'criado_em')
+  DateTime get criadoEm => throw _privateConstructorUsedError;
+  @JsonKey(name: 'atualizado_em')
+  DateTime? get atualizadoEm => throw _privateConstructorUsedError;
 
   /// Serializes this OrderModel to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -239,14 +480,24 @@ abstract class $OrderModelCopyWith<$Res> {
   @useResult
   $Res call(
       {String id,
-      List<OrderItemModel> items,
-      double total,
-      OrderStatus status,
-      @JsonKey(name: 'created_at') DateTime createdAt,
-      @JsonKey(name: 'store_id') String? storeId,
-      @JsonKey(name: 'store_name') String? storeName,
-      @JsonKey(name: 'delivery_address') String? deliveryAddress,
-      @JsonKey(name: 'estimated_delivery') DateTime? estimatedDelivery});
+      @JsonKey(name: 'cliente_id') String clienteId,
+      @JsonKey(name: 'lojista_id') String lojistaId,
+      @JsonKey(name: 'nome_lojista') String? nomeLojista,
+      @JsonKey(name: 'endereco_entrega') String? enderecoEntrega,
+      @JsonKey(name: 'cidade_entrega') String? cidadeEntrega,
+      @JsonKey(name: 'estado_entrega') String? estadoEntrega,
+      @JsonKey(name: 'cep_entrega') String? cepEntrega,
+      @JsonKey(name: 'forma_pagamento') String? formaPagamento,
+      String? observacoes,
+      String subtotal,
+      @JsonKey(name: 'taxa_entrega') String taxaEntrega,
+      String desconto,
+      String total,
+      String status,
+      @JsonKey(name: 'codigo_confirmacao') String? codigoConfirmacao,
+      List<OrderItemResponseModel> itens,
+      @JsonKey(name: 'criado_em') DateTime criadoEm,
+      @JsonKey(name: 'atualizado_em') DateTime? atualizadoEm});
 }
 
 /// @nodoc
@@ -265,51 +516,101 @@ class _$OrderModelCopyWithImpl<$Res, $Val extends OrderModel>
   @override
   $Res call({
     Object? id = null,
-    Object? items = null,
+    Object? clienteId = null,
+    Object? lojistaId = null,
+    Object? nomeLojista = freezed,
+    Object? enderecoEntrega = freezed,
+    Object? cidadeEntrega = freezed,
+    Object? estadoEntrega = freezed,
+    Object? cepEntrega = freezed,
+    Object? formaPagamento = freezed,
+    Object? observacoes = freezed,
+    Object? subtotal = null,
+    Object? taxaEntrega = null,
+    Object? desconto = null,
     Object? total = null,
     Object? status = null,
-    Object? createdAt = null,
-    Object? storeId = freezed,
-    Object? storeName = freezed,
-    Object? deliveryAddress = freezed,
-    Object? estimatedDelivery = freezed,
+    Object? codigoConfirmacao = freezed,
+    Object? itens = null,
+    Object? criadoEm = null,
+    Object? atualizadoEm = freezed,
   }) {
     return _then(_value.copyWith(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      items: null == items
-          ? _value.items
-          : items // ignore: cast_nullable_to_non_nullable
-              as List<OrderItemModel>,
+      clienteId: null == clienteId
+          ? _value.clienteId
+          : clienteId // ignore: cast_nullable_to_non_nullable
+              as String,
+      lojistaId: null == lojistaId
+          ? _value.lojistaId
+          : lojistaId // ignore: cast_nullable_to_non_nullable
+              as String,
+      nomeLojista: freezed == nomeLojista
+          ? _value.nomeLojista
+          : nomeLojista // ignore: cast_nullable_to_non_nullable
+              as String?,
+      enderecoEntrega: freezed == enderecoEntrega
+          ? _value.enderecoEntrega
+          : enderecoEntrega // ignore: cast_nullable_to_non_nullable
+              as String?,
+      cidadeEntrega: freezed == cidadeEntrega
+          ? _value.cidadeEntrega
+          : cidadeEntrega // ignore: cast_nullable_to_non_nullable
+              as String?,
+      estadoEntrega: freezed == estadoEntrega
+          ? _value.estadoEntrega
+          : estadoEntrega // ignore: cast_nullable_to_non_nullable
+              as String?,
+      cepEntrega: freezed == cepEntrega
+          ? _value.cepEntrega
+          : cepEntrega // ignore: cast_nullable_to_non_nullable
+              as String?,
+      formaPagamento: freezed == formaPagamento
+          ? _value.formaPagamento
+          : formaPagamento // ignore: cast_nullable_to_non_nullable
+              as String?,
+      observacoes: freezed == observacoes
+          ? _value.observacoes
+          : observacoes // ignore: cast_nullable_to_non_nullable
+              as String?,
+      subtotal: null == subtotal
+          ? _value.subtotal
+          : subtotal // ignore: cast_nullable_to_non_nullable
+              as String,
+      taxaEntrega: null == taxaEntrega
+          ? _value.taxaEntrega
+          : taxaEntrega // ignore: cast_nullable_to_non_nullable
+              as String,
+      desconto: null == desconto
+          ? _value.desconto
+          : desconto // ignore: cast_nullable_to_non_nullable
+              as String,
       total: null == total
           ? _value.total
           : total // ignore: cast_nullable_to_non_nullable
-              as double,
+              as String,
       status: null == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
-              as OrderStatus,
-      createdAt: null == createdAt
-          ? _value.createdAt
-          : createdAt // ignore: cast_nullable_to_non_nullable
+              as String,
+      codigoConfirmacao: freezed == codigoConfirmacao
+          ? _value.codigoConfirmacao
+          : codigoConfirmacao // ignore: cast_nullable_to_non_nullable
+              as String?,
+      itens: null == itens
+          ? _value.itens
+          : itens // ignore: cast_nullable_to_non_nullable
+              as List<OrderItemResponseModel>,
+      criadoEm: null == criadoEm
+          ? _value.criadoEm
+          : criadoEm // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      storeId: freezed == storeId
-          ? _value.storeId
-          : storeId // ignore: cast_nullable_to_non_nullable
-              as String?,
-      storeName: freezed == storeName
-          ? _value.storeName
-          : storeName // ignore: cast_nullable_to_non_nullable
-              as String?,
-      deliveryAddress: freezed == deliveryAddress
-          ? _value.deliveryAddress
-          : deliveryAddress // ignore: cast_nullable_to_non_nullable
-              as String?,
-      estimatedDelivery: freezed == estimatedDelivery
-          ? _value.estimatedDelivery
-          : estimatedDelivery // ignore: cast_nullable_to_non_nullable
+      atualizadoEm: freezed == atualizadoEm
+          ? _value.atualizadoEm
+          : atualizadoEm // ignore: cast_nullable_to_non_nullable
               as DateTime?,
     ) as $Val);
   }
@@ -325,14 +626,24 @@ abstract class _$$OrderModelImplCopyWith<$Res>
   @useResult
   $Res call(
       {String id,
-      List<OrderItemModel> items,
-      double total,
-      OrderStatus status,
-      @JsonKey(name: 'created_at') DateTime createdAt,
-      @JsonKey(name: 'store_id') String? storeId,
-      @JsonKey(name: 'store_name') String? storeName,
-      @JsonKey(name: 'delivery_address') String? deliveryAddress,
-      @JsonKey(name: 'estimated_delivery') DateTime? estimatedDelivery});
+      @JsonKey(name: 'cliente_id') String clienteId,
+      @JsonKey(name: 'lojista_id') String lojistaId,
+      @JsonKey(name: 'nome_lojista') String? nomeLojista,
+      @JsonKey(name: 'endereco_entrega') String? enderecoEntrega,
+      @JsonKey(name: 'cidade_entrega') String? cidadeEntrega,
+      @JsonKey(name: 'estado_entrega') String? estadoEntrega,
+      @JsonKey(name: 'cep_entrega') String? cepEntrega,
+      @JsonKey(name: 'forma_pagamento') String? formaPagamento,
+      String? observacoes,
+      String subtotal,
+      @JsonKey(name: 'taxa_entrega') String taxaEntrega,
+      String desconto,
+      String total,
+      String status,
+      @JsonKey(name: 'codigo_confirmacao') String? codigoConfirmacao,
+      List<OrderItemResponseModel> itens,
+      @JsonKey(name: 'criado_em') DateTime criadoEm,
+      @JsonKey(name: 'atualizado_em') DateTime? atualizadoEm});
 }
 
 /// @nodoc
@@ -349,51 +660,101 @@ class __$$OrderModelImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = null,
-    Object? items = null,
+    Object? clienteId = null,
+    Object? lojistaId = null,
+    Object? nomeLojista = freezed,
+    Object? enderecoEntrega = freezed,
+    Object? cidadeEntrega = freezed,
+    Object? estadoEntrega = freezed,
+    Object? cepEntrega = freezed,
+    Object? formaPagamento = freezed,
+    Object? observacoes = freezed,
+    Object? subtotal = null,
+    Object? taxaEntrega = null,
+    Object? desconto = null,
     Object? total = null,
     Object? status = null,
-    Object? createdAt = null,
-    Object? storeId = freezed,
-    Object? storeName = freezed,
-    Object? deliveryAddress = freezed,
-    Object? estimatedDelivery = freezed,
+    Object? codigoConfirmacao = freezed,
+    Object? itens = null,
+    Object? criadoEm = null,
+    Object? atualizadoEm = freezed,
   }) {
     return _then(_$OrderModelImpl(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      items: null == items
-          ? _value._items
-          : items // ignore: cast_nullable_to_non_nullable
-              as List<OrderItemModel>,
+      clienteId: null == clienteId
+          ? _value.clienteId
+          : clienteId // ignore: cast_nullable_to_non_nullable
+              as String,
+      lojistaId: null == lojistaId
+          ? _value.lojistaId
+          : lojistaId // ignore: cast_nullable_to_non_nullable
+              as String,
+      nomeLojista: freezed == nomeLojista
+          ? _value.nomeLojista
+          : nomeLojista // ignore: cast_nullable_to_non_nullable
+              as String?,
+      enderecoEntrega: freezed == enderecoEntrega
+          ? _value.enderecoEntrega
+          : enderecoEntrega // ignore: cast_nullable_to_non_nullable
+              as String?,
+      cidadeEntrega: freezed == cidadeEntrega
+          ? _value.cidadeEntrega
+          : cidadeEntrega // ignore: cast_nullable_to_non_nullable
+              as String?,
+      estadoEntrega: freezed == estadoEntrega
+          ? _value.estadoEntrega
+          : estadoEntrega // ignore: cast_nullable_to_non_nullable
+              as String?,
+      cepEntrega: freezed == cepEntrega
+          ? _value.cepEntrega
+          : cepEntrega // ignore: cast_nullable_to_non_nullable
+              as String?,
+      formaPagamento: freezed == formaPagamento
+          ? _value.formaPagamento
+          : formaPagamento // ignore: cast_nullable_to_non_nullable
+              as String?,
+      observacoes: freezed == observacoes
+          ? _value.observacoes
+          : observacoes // ignore: cast_nullable_to_non_nullable
+              as String?,
+      subtotal: null == subtotal
+          ? _value.subtotal
+          : subtotal // ignore: cast_nullable_to_non_nullable
+              as String,
+      taxaEntrega: null == taxaEntrega
+          ? _value.taxaEntrega
+          : taxaEntrega // ignore: cast_nullable_to_non_nullable
+              as String,
+      desconto: null == desconto
+          ? _value.desconto
+          : desconto // ignore: cast_nullable_to_non_nullable
+              as String,
       total: null == total
           ? _value.total
           : total // ignore: cast_nullable_to_non_nullable
-              as double,
+              as String,
       status: null == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
-              as OrderStatus,
-      createdAt: null == createdAt
-          ? _value.createdAt
-          : createdAt // ignore: cast_nullable_to_non_nullable
+              as String,
+      codigoConfirmacao: freezed == codigoConfirmacao
+          ? _value.codigoConfirmacao
+          : codigoConfirmacao // ignore: cast_nullable_to_non_nullable
+              as String?,
+      itens: null == itens
+          ? _value._itens
+          : itens // ignore: cast_nullable_to_non_nullable
+              as List<OrderItemResponseModel>,
+      criadoEm: null == criadoEm
+          ? _value.criadoEm
+          : criadoEm // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      storeId: freezed == storeId
-          ? _value.storeId
-          : storeId // ignore: cast_nullable_to_non_nullable
-              as String?,
-      storeName: freezed == storeName
-          ? _value.storeName
-          : storeName // ignore: cast_nullable_to_non_nullable
-              as String?,
-      deliveryAddress: freezed == deliveryAddress
-          ? _value.deliveryAddress
-          : deliveryAddress // ignore: cast_nullable_to_non_nullable
-              as String?,
-      estimatedDelivery: freezed == estimatedDelivery
-          ? _value.estimatedDelivery
-          : estimatedDelivery // ignore: cast_nullable_to_non_nullable
+      atualizadoEm: freezed == atualizadoEm
+          ? _value.atualizadoEm
+          : atualizadoEm // ignore: cast_nullable_to_non_nullable
               as DateTime?,
     ));
   }
@@ -404,15 +765,25 @@ class __$$OrderModelImplCopyWithImpl<$Res>
 class _$OrderModelImpl extends _OrderModel {
   const _$OrderModelImpl(
       {required this.id,
-      required final List<OrderItemModel> items,
+      @JsonKey(name: 'cliente_id') required this.clienteId,
+      @JsonKey(name: 'lojista_id') required this.lojistaId,
+      @JsonKey(name: 'nome_lojista') this.nomeLojista,
+      @JsonKey(name: 'endereco_entrega') this.enderecoEntrega,
+      @JsonKey(name: 'cidade_entrega') this.cidadeEntrega,
+      @JsonKey(name: 'estado_entrega') this.estadoEntrega,
+      @JsonKey(name: 'cep_entrega') this.cepEntrega,
+      @JsonKey(name: 'forma_pagamento') this.formaPagamento,
+      this.observacoes,
+      required this.subtotal,
+      @JsonKey(name: 'taxa_entrega') this.taxaEntrega = '0',
+      this.desconto = '0',
       required this.total,
       required this.status,
-      @JsonKey(name: 'created_at') required this.createdAt,
-      @JsonKey(name: 'store_id') this.storeId,
-      @JsonKey(name: 'store_name') this.storeName,
-      @JsonKey(name: 'delivery_address') this.deliveryAddress,
-      @JsonKey(name: 'estimated_delivery') this.estimatedDelivery})
-      : _items = items,
+      @JsonKey(name: 'codigo_confirmacao') this.codigoConfirmacao,
+      final List<OrderItemResponseModel> itens = const [],
+      @JsonKey(name: 'criado_em') required this.criadoEm,
+      @JsonKey(name: 'atualizado_em') this.atualizadoEm})
+      : _itens = itens,
         super._();
 
   factory _$OrderModelImpl.fromJson(Map<String, dynamic> json) =>
@@ -420,37 +791,66 @@ class _$OrderModelImpl extends _OrderModel {
 
   @override
   final String id;
-  final List<OrderItemModel> _items;
   @override
-  List<OrderItemModel> get items {
-    if (_items is EqualUnmodifiableListView) return _items;
+  @JsonKey(name: 'cliente_id')
+  final String clienteId;
+  @override
+  @JsonKey(name: 'lojista_id')
+  final String lojistaId;
+  @override
+  @JsonKey(name: 'nome_lojista')
+  final String? nomeLojista;
+  @override
+  @JsonKey(name: 'endereco_entrega')
+  final String? enderecoEntrega;
+  @override
+  @JsonKey(name: 'cidade_entrega')
+  final String? cidadeEntrega;
+  @override
+  @JsonKey(name: 'estado_entrega')
+  final String? estadoEntrega;
+  @override
+  @JsonKey(name: 'cep_entrega')
+  final String? cepEntrega;
+  @override
+  @JsonKey(name: 'forma_pagamento')
+  final String? formaPagamento;
+  @override
+  final String? observacoes;
+  @override
+  final String subtotal;
+  @override
+  @JsonKey(name: 'taxa_entrega')
+  final String taxaEntrega;
+  @override
+  @JsonKey()
+  final String desconto;
+  @override
+  final String total;
+  @override
+  final String status;
+  @override
+  @JsonKey(name: 'codigo_confirmacao')
+  final String? codigoConfirmacao;
+  final List<OrderItemResponseModel> _itens;
+  @override
+  @JsonKey()
+  List<OrderItemResponseModel> get itens {
+    if (_itens is EqualUnmodifiableListView) return _itens;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_items);
+    return EqualUnmodifiableListView(_itens);
   }
 
   @override
-  final double total;
+  @JsonKey(name: 'criado_em')
+  final DateTime criadoEm;
   @override
-  final OrderStatus status;
-  @override
-  @JsonKey(name: 'created_at')
-  final DateTime createdAt;
-  @override
-  @JsonKey(name: 'store_id')
-  final String? storeId;
-  @override
-  @JsonKey(name: 'store_name')
-  final String? storeName;
-  @override
-  @JsonKey(name: 'delivery_address')
-  final String? deliveryAddress;
-  @override
-  @JsonKey(name: 'estimated_delivery')
-  final DateTime? estimatedDelivery;
+  @JsonKey(name: 'atualizado_em')
+  final DateTime? atualizadoEm;
 
   @override
   String toString() {
-    return 'OrderModel(id: $id, items: $items, total: $total, status: $status, createdAt: $createdAt, storeId: $storeId, storeName: $storeName, deliveryAddress: $deliveryAddress, estimatedDelivery: $estimatedDelivery)';
+    return 'OrderModel(id: $id, clienteId: $clienteId, lojistaId: $lojistaId, nomeLojista: $nomeLojista, enderecoEntrega: $enderecoEntrega, cidadeEntrega: $cidadeEntrega, estadoEntrega: $estadoEntrega, cepEntrega: $cepEntrega, formaPagamento: $formaPagamento, observacoes: $observacoes, subtotal: $subtotal, taxaEntrega: $taxaEntrega, desconto: $desconto, total: $total, status: $status, codigoConfirmacao: $codigoConfirmacao, itens: $itens, criadoEm: $criadoEm, atualizadoEm: $atualizadoEm)';
   }
 
   @override
@@ -459,33 +859,65 @@ class _$OrderModelImpl extends _OrderModel {
         (other.runtimeType == runtimeType &&
             other is _$OrderModelImpl &&
             (identical(other.id, id) || other.id == id) &&
-            const DeepCollectionEquality().equals(other._items, _items) &&
+            (identical(other.clienteId, clienteId) ||
+                other.clienteId == clienteId) &&
+            (identical(other.lojistaId, lojistaId) ||
+                other.lojistaId == lojistaId) &&
+            (identical(other.nomeLojista, nomeLojista) ||
+                other.nomeLojista == nomeLojista) &&
+            (identical(other.enderecoEntrega, enderecoEntrega) ||
+                other.enderecoEntrega == enderecoEntrega) &&
+            (identical(other.cidadeEntrega, cidadeEntrega) ||
+                other.cidadeEntrega == cidadeEntrega) &&
+            (identical(other.estadoEntrega, estadoEntrega) ||
+                other.estadoEntrega == estadoEntrega) &&
+            (identical(other.cepEntrega, cepEntrega) ||
+                other.cepEntrega == cepEntrega) &&
+            (identical(other.formaPagamento, formaPagamento) ||
+                other.formaPagamento == formaPagamento) &&
+            (identical(other.observacoes, observacoes) ||
+                other.observacoes == observacoes) &&
+            (identical(other.subtotal, subtotal) ||
+                other.subtotal == subtotal) &&
+            (identical(other.taxaEntrega, taxaEntrega) ||
+                other.taxaEntrega == taxaEntrega) &&
+            (identical(other.desconto, desconto) ||
+                other.desconto == desconto) &&
             (identical(other.total, total) || other.total == total) &&
             (identical(other.status, status) || other.status == status) &&
-            (identical(other.createdAt, createdAt) ||
-                other.createdAt == createdAt) &&
-            (identical(other.storeId, storeId) || other.storeId == storeId) &&
-            (identical(other.storeName, storeName) ||
-                other.storeName == storeName) &&
-            (identical(other.deliveryAddress, deliveryAddress) ||
-                other.deliveryAddress == deliveryAddress) &&
-            (identical(other.estimatedDelivery, estimatedDelivery) ||
-                other.estimatedDelivery == estimatedDelivery));
+            (identical(other.codigoConfirmacao, codigoConfirmacao) ||
+                other.codigoConfirmacao == codigoConfirmacao) &&
+            const DeepCollectionEquality().equals(other._itens, _itens) &&
+            (identical(other.criadoEm, criadoEm) ||
+                other.criadoEm == criadoEm) &&
+            (identical(other.atualizadoEm, atualizadoEm) ||
+                other.atualizadoEm == atualizadoEm));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      id,
-      const DeepCollectionEquality().hash(_items),
-      total,
-      status,
-      createdAt,
-      storeId,
-      storeName,
-      deliveryAddress,
-      estimatedDelivery);
+  int get hashCode => Object.hashAll([
+        runtimeType,
+        id,
+        clienteId,
+        lojistaId,
+        nomeLojista,
+        enderecoEntrega,
+        cidadeEntrega,
+        estadoEntrega,
+        cepEntrega,
+        formaPagamento,
+        observacoes,
+        subtotal,
+        taxaEntrega,
+        desconto,
+        total,
+        status,
+        codigoConfirmacao,
+        const DeepCollectionEquality().hash(_itens),
+        criadoEm,
+        atualizadoEm
+      ]);
 
   /// Create a copy of OrderModel
   /// with the given fields replaced by the non-null parameter values.
@@ -505,16 +937,26 @@ class _$OrderModelImpl extends _OrderModel {
 
 abstract class _OrderModel extends OrderModel {
   const factory _OrderModel(
-      {required final String id,
-      required final List<OrderItemModel> items,
-      required final double total,
-      required final OrderStatus status,
-      @JsonKey(name: 'created_at') required final DateTime createdAt,
-      @JsonKey(name: 'store_id') final String? storeId,
-      @JsonKey(name: 'store_name') final String? storeName,
-      @JsonKey(name: 'delivery_address') final String? deliveryAddress,
-      @JsonKey(name: 'estimated_delivery')
-      final DateTime? estimatedDelivery}) = _$OrderModelImpl;
+          {required final String id,
+          @JsonKey(name: 'cliente_id') required final String clienteId,
+          @JsonKey(name: 'lojista_id') required final String lojistaId,
+          @JsonKey(name: 'nome_lojista') final String? nomeLojista,
+          @JsonKey(name: 'endereco_entrega') final String? enderecoEntrega,
+          @JsonKey(name: 'cidade_entrega') final String? cidadeEntrega,
+          @JsonKey(name: 'estado_entrega') final String? estadoEntrega,
+          @JsonKey(name: 'cep_entrega') final String? cepEntrega,
+          @JsonKey(name: 'forma_pagamento') final String? formaPagamento,
+          final String? observacoes,
+          required final String subtotal,
+          @JsonKey(name: 'taxa_entrega') final String taxaEntrega,
+          final String desconto,
+          required final String total,
+          required final String status,
+          @JsonKey(name: 'codigo_confirmacao') final String? codigoConfirmacao,
+          final List<OrderItemResponseModel> itens,
+          @JsonKey(name: 'criado_em') required final DateTime criadoEm,
+          @JsonKey(name: 'atualizado_em') final DateTime? atualizadoEm}) =
+      _$OrderModelImpl;
   const _OrderModel._() : super._();
 
   factory _OrderModel.fromJson(Map<String, dynamic> json) =
@@ -523,26 +965,53 @@ abstract class _OrderModel extends OrderModel {
   @override
   String get id;
   @override
-  List<OrderItemModel> get items;
+  @JsonKey(name: 'cliente_id')
+  String get clienteId;
   @override
-  double get total;
+  @JsonKey(name: 'lojista_id')
+  String get lojistaId;
   @override
-  OrderStatus get status;
+  @JsonKey(name: 'nome_lojista')
+  String? get nomeLojista;
   @override
-  @JsonKey(name: 'created_at')
-  DateTime get createdAt;
+  @JsonKey(name: 'endereco_entrega')
+  String? get enderecoEntrega;
   @override
-  @JsonKey(name: 'store_id')
-  String? get storeId;
+  @JsonKey(name: 'cidade_entrega')
+  String? get cidadeEntrega;
   @override
-  @JsonKey(name: 'store_name')
-  String? get storeName;
+  @JsonKey(name: 'estado_entrega')
+  String? get estadoEntrega;
   @override
-  @JsonKey(name: 'delivery_address')
-  String? get deliveryAddress;
+  @JsonKey(name: 'cep_entrega')
+  String? get cepEntrega;
   @override
-  @JsonKey(name: 'estimated_delivery')
-  DateTime? get estimatedDelivery;
+  @JsonKey(name: 'forma_pagamento')
+  String? get formaPagamento;
+  @override
+  String? get observacoes;
+  @override
+  String get subtotal;
+  @override
+  @JsonKey(name: 'taxa_entrega')
+  String get taxaEntrega;
+  @override
+  String get desconto;
+  @override
+  String get total;
+  @override
+  String get status;
+  @override
+  @JsonKey(name: 'codigo_confirmacao')
+  String? get codigoConfirmacao;
+  @override
+  List<OrderItemResponseModel> get itens;
+  @override
+  @JsonKey(name: 'criado_em')
+  DateTime get criadoEm;
+  @override
+  @JsonKey(name: 'atualizado_em')
+  DateTime? get atualizadoEm;
 
   /// Create a copy of OrderModel
   /// with the given fields replaced by the non-null parameter values.

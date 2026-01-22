@@ -23,7 +23,7 @@ class JarinuShopApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
-      title: 'Jarinu Shop',
+      title: 'Regional Shop',
       debugShowCheckedModeBanner: false,
       theme: AppTheme.lightTheme,
       routerConfig: goRouter,

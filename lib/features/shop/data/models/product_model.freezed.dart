@@ -21,20 +21,30 @@ ProductModel _$ProductModelFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$ProductModel {
   String get id => throw _privateConstructorUsedError;
-  String get name => throw _privateConstructorUsedError;
-  String get description => throw _privateConstructorUsedError;
-  double get price => throw _privateConstructorUsedError;
-  @JsonKey(name: 'image_url')
-  String get imageUrl => throw _privateConstructorUsedError;
-  @JsonKey(name: 'store_id')
-  String get storeId => throw _privateConstructorUsedError;
-  @JsonKey(name: 'store_name')
-  String get storeName => throw _privateConstructorUsedError;
-  String? get category => throw _privateConstructorUsedError;
-  int get stock => throw _privateConstructorUsedError;
-  double get rating => throw _privateConstructorUsedError;
-  @JsonKey(name: 'review_count')
-  int get reviewCount => throw _privateConstructorUsedError;
+  @JsonKey(name: 'lojista_id')
+  String get lojistaId => throw _privateConstructorUsedError;
+  @JsonKey(name: 'categoria_id')
+  String? get categoriaId => throw _privateConstructorUsedError;
+  String get nome => throw _privateConstructorUsedError;
+  String? get descricao => throw _privateConstructorUsedError;
+  String get preco => throw _privateConstructorUsedError;
+  @JsonKey(name: 'preco_promocional')
+  String? get precoPromocional => throw _privateConstructorUsedError;
+  String? get custo => throw _privateConstructorUsedError;
+  int get estoque => throw _privateConstructorUsedError;
+  @JsonKey(name: 'estoque_minimo')
+  int get estoqueMinimo => throw _privateConstructorUsedError;
+  @JsonKey(name: 'controla_estoque')
+  bool get controlaEstoque => throw _privateConstructorUsedError;
+  String? get sku => throw _privateConstructorUsedError;
+  @JsonKey(name: 'codigo_barras')
+  String? get codigoBarras => throw _privateConstructorUsedError;
+  bool get ativo => throw _privateConstructorUsedError;
+  int get ordem => throw _privateConstructorUsedError;
+  @JsonKey(name: 'criado_em')
+  String? get criadoEm => throw _privateConstructorUsedError;
+  @JsonKey(name: 'atualizado_em')
+  String? get atualizadoEm => throw _privateConstructorUsedError;
 
   /// Serializes this ProductModel to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -54,16 +64,22 @@ abstract class $ProductModelCopyWith<$Res> {
   @useResult
   $Res call(
       {String id,
-      String name,
-      String description,
-      double price,
-      @JsonKey(name: 'image_url') String imageUrl,
-      @JsonKey(name: 'store_id') String storeId,
-      @JsonKey(name: 'store_name') String storeName,
-      String? category,
-      int stock,
-      double rating,
-      @JsonKey(name: 'review_count') int reviewCount});
+      @JsonKey(name: 'lojista_id') String lojistaId,
+      @JsonKey(name: 'categoria_id') String? categoriaId,
+      String nome,
+      String? descricao,
+      String preco,
+      @JsonKey(name: 'preco_promocional') String? precoPromocional,
+      String? custo,
+      int estoque,
+      @JsonKey(name: 'estoque_minimo') int estoqueMinimo,
+      @JsonKey(name: 'controla_estoque') bool controlaEstoque,
+      String? sku,
+      @JsonKey(name: 'codigo_barras') String? codigoBarras,
+      bool ativo,
+      int ordem,
+      @JsonKey(name: 'criado_em') String? criadoEm,
+      @JsonKey(name: 'atualizado_em') String? atualizadoEm});
 }
 
 /// @nodoc
@@ -82,62 +98,92 @@ class _$ProductModelCopyWithImpl<$Res, $Val extends ProductModel>
   @override
   $Res call({
     Object? id = null,
-    Object? name = null,
-    Object? description = null,
-    Object? price = null,
-    Object? imageUrl = null,
-    Object? storeId = null,
-    Object? storeName = null,
-    Object? category = freezed,
-    Object? stock = null,
-    Object? rating = null,
-    Object? reviewCount = null,
+    Object? lojistaId = null,
+    Object? categoriaId = freezed,
+    Object? nome = null,
+    Object? descricao = freezed,
+    Object? preco = null,
+    Object? precoPromocional = freezed,
+    Object? custo = freezed,
+    Object? estoque = null,
+    Object? estoqueMinimo = null,
+    Object? controlaEstoque = null,
+    Object? sku = freezed,
+    Object? codigoBarras = freezed,
+    Object? ativo = null,
+    Object? ordem = null,
+    Object? criadoEm = freezed,
+    Object? atualizadoEm = freezed,
   }) {
     return _then(_value.copyWith(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      name: null == name
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
+      lojistaId: null == lojistaId
+          ? _value.lojistaId
+          : lojistaId // ignore: cast_nullable_to_non_nullable
               as String,
-      description: null == description
-          ? _value.description
-          : description // ignore: cast_nullable_to_non_nullable
-              as String,
-      price: null == price
-          ? _value.price
-          : price // ignore: cast_nullable_to_non_nullable
-              as double,
-      imageUrl: null == imageUrl
-          ? _value.imageUrl
-          : imageUrl // ignore: cast_nullable_to_non_nullable
-              as String,
-      storeId: null == storeId
-          ? _value.storeId
-          : storeId // ignore: cast_nullable_to_non_nullable
-              as String,
-      storeName: null == storeName
-          ? _value.storeName
-          : storeName // ignore: cast_nullable_to_non_nullable
-              as String,
-      category: freezed == category
-          ? _value.category
-          : category // ignore: cast_nullable_to_non_nullable
+      categoriaId: freezed == categoriaId
+          ? _value.categoriaId
+          : categoriaId // ignore: cast_nullable_to_non_nullable
               as String?,
-      stock: null == stock
-          ? _value.stock
-          : stock // ignore: cast_nullable_to_non_nullable
+      nome: null == nome
+          ? _value.nome
+          : nome // ignore: cast_nullable_to_non_nullable
+              as String,
+      descricao: freezed == descricao
+          ? _value.descricao
+          : descricao // ignore: cast_nullable_to_non_nullable
+              as String?,
+      preco: null == preco
+          ? _value.preco
+          : preco // ignore: cast_nullable_to_non_nullable
+              as String,
+      precoPromocional: freezed == precoPromocional
+          ? _value.precoPromocional
+          : precoPromocional // ignore: cast_nullable_to_non_nullable
+              as String?,
+      custo: freezed == custo
+          ? _value.custo
+          : custo // ignore: cast_nullable_to_non_nullable
+              as String?,
+      estoque: null == estoque
+          ? _value.estoque
+          : estoque // ignore: cast_nullable_to_non_nullable
               as int,
-      rating: null == rating
-          ? _value.rating
-          : rating // ignore: cast_nullable_to_non_nullable
-              as double,
-      reviewCount: null == reviewCount
-          ? _value.reviewCount
-          : reviewCount // ignore: cast_nullable_to_non_nullable
+      estoqueMinimo: null == estoqueMinimo
+          ? _value.estoqueMinimo
+          : estoqueMinimo // ignore: cast_nullable_to_non_nullable
               as int,
+      controlaEstoque: null == controlaEstoque
+          ? _value.controlaEstoque
+          : controlaEstoque // ignore: cast_nullable_to_non_nullable
+              as bool,
+      sku: freezed == sku
+          ? _value.sku
+          : sku // ignore: cast_nullable_to_non_nullable
+              as String?,
+      codigoBarras: freezed == codigoBarras
+          ? _value.codigoBarras
+          : codigoBarras // ignore: cast_nullable_to_non_nullable
+              as String?,
+      ativo: null == ativo
+          ? _value.ativo
+          : ativo // ignore: cast_nullable_to_non_nullable
+              as bool,
+      ordem: null == ordem
+          ? _value.ordem
+          : ordem // ignore: cast_nullable_to_non_nullable
+              as int,
+      criadoEm: freezed == criadoEm
+          ? _value.criadoEm
+          : criadoEm // ignore: cast_nullable_to_non_nullable
+              as String?,
+      atualizadoEm: freezed == atualizadoEm
+          ? _value.atualizadoEm
+          : atualizadoEm // ignore: cast_nullable_to_non_nullable
+              as String?,
     ) as $Val);
   }
 }
@@ -152,16 +198,22 @@ abstract class _$$ProductModelImplCopyWith<$Res>
   @useResult
   $Res call(
       {String id,
-      String name,
-      String description,
-      double price,
-      @JsonKey(name: 'image_url') String imageUrl,
-      @JsonKey(name: 'store_id') String storeId,
-      @JsonKey(name: 'store_name') String storeName,
-      String? category,
-      int stock,
-      double rating,
-      @JsonKey(name: 'review_count') int reviewCount});
+      @JsonKey(name: 'lojista_id') String lojistaId,
+      @JsonKey(name: 'categoria_id') String? categoriaId,
+      String nome,
+      String? descricao,
+      String preco,
+      @JsonKey(name: 'preco_promocional') String? precoPromocional,
+      String? custo,
+      int estoque,
+      @JsonKey(name: 'estoque_minimo') int estoqueMinimo,
+      @JsonKey(name: 'controla_estoque') bool controlaEstoque,
+      String? sku,
+      @JsonKey(name: 'codigo_barras') String? codigoBarras,
+      bool ativo,
+      int ordem,
+      @JsonKey(name: 'criado_em') String? criadoEm,
+      @JsonKey(name: 'atualizado_em') String? atualizadoEm});
 }
 
 /// @nodoc
@@ -178,62 +230,92 @@ class __$$ProductModelImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = null,
-    Object? name = null,
-    Object? description = null,
-    Object? price = null,
-    Object? imageUrl = null,
-    Object? storeId = null,
-    Object? storeName = null,
-    Object? category = freezed,
-    Object? stock = null,
-    Object? rating = null,
-    Object? reviewCount = null,
+    Object? lojistaId = null,
+    Object? categoriaId = freezed,
+    Object? nome = null,
+    Object? descricao = freezed,
+    Object? preco = null,
+    Object? precoPromocional = freezed,
+    Object? custo = freezed,
+    Object? estoque = null,
+    Object? estoqueMinimo = null,
+    Object? controlaEstoque = null,
+    Object? sku = freezed,
+    Object? codigoBarras = freezed,
+    Object? ativo = null,
+    Object? ordem = null,
+    Object? criadoEm = freezed,
+    Object? atualizadoEm = freezed,
   }) {
     return _then(_$ProductModelImpl(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      name: null == name
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
+      lojistaId: null == lojistaId
+          ? _value.lojistaId
+          : lojistaId // ignore: cast_nullable_to_non_nullable
               as String,
-      description: null == description
-          ? _value.description
-          : description // ignore: cast_nullable_to_non_nullable
-              as String,
-      price: null == price
-          ? _value.price
-          : price // ignore: cast_nullable_to_non_nullable
-              as double,
-      imageUrl: null == imageUrl
-          ? _value.imageUrl
-          : imageUrl // ignore: cast_nullable_to_non_nullable
-              as String,
-      storeId: null == storeId
-          ? _value.storeId
-          : storeId // ignore: cast_nullable_to_non_nullable
-              as String,
-      storeName: null == storeName
-          ? _value.storeName
-          : storeName // ignore: cast_nullable_to_non_nullable
-              as String,
-      category: freezed == category
-          ? _value.category
-          : category // ignore: cast_nullable_to_non_nullable
+      categoriaId: freezed == categoriaId
+          ? _value.categoriaId
+          : categoriaId // ignore: cast_nullable_to_non_nullable
               as String?,
-      stock: null == stock
-          ? _value.stock
-          : stock // ignore: cast_nullable_to_non_nullable
+      nome: null == nome
+          ? _value.nome
+          : nome // ignore: cast_nullable_to_non_nullable
+              as String,
+      descricao: freezed == descricao
+          ? _value.descricao
+          : descricao // ignore: cast_nullable_to_non_nullable
+              as String?,
+      preco: null == preco
+          ? _value.preco
+          : preco // ignore: cast_nullable_to_non_nullable
+              as String,
+      precoPromocional: freezed == precoPromocional
+          ? _value.precoPromocional
+          : precoPromocional // ignore: cast_nullable_to_non_nullable
+              as String?,
+      custo: freezed == custo
+          ? _value.custo
+          : custo // ignore: cast_nullable_to_non_nullable
+              as String?,
+      estoque: null == estoque
+          ? _value.estoque
+          : estoque // ignore: cast_nullable_to_non_nullable
               as int,
-      rating: null == rating
-          ? _value.rating
-          : rating // ignore: cast_nullable_to_non_nullable
-              as double,
-      reviewCount: null == reviewCount
-          ? _value.reviewCount
-          : reviewCount // ignore: cast_nullable_to_non_nullable
+      estoqueMinimo: null == estoqueMinimo
+          ? _value.estoqueMinimo
+          : estoqueMinimo // ignore: cast_nullable_to_non_nullable
               as int,
+      controlaEstoque: null == controlaEstoque
+          ? _value.controlaEstoque
+          : controlaEstoque // ignore: cast_nullable_to_non_nullable
+              as bool,
+      sku: freezed == sku
+          ? _value.sku
+          : sku // ignore: cast_nullable_to_non_nullable
+              as String?,
+      codigoBarras: freezed == codigoBarras
+          ? _value.codigoBarras
+          : codigoBarras // ignore: cast_nullable_to_non_nullable
+              as String?,
+      ativo: null == ativo
+          ? _value.ativo
+          : ativo // ignore: cast_nullable_to_non_nullable
+              as bool,
+      ordem: null == ordem
+          ? _value.ordem
+          : ordem // ignore: cast_nullable_to_non_nullable
+              as int,
+      criadoEm: freezed == criadoEm
+          ? _value.criadoEm
+          : criadoEm // ignore: cast_nullable_to_non_nullable
+              as String?,
+      atualizadoEm: freezed == atualizadoEm
+          ? _value.atualizadoEm
+          : atualizadoEm // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -243,16 +325,22 @@ class __$$ProductModelImplCopyWithImpl<$Res>
 class _$ProductModelImpl extends _ProductModel {
   const _$ProductModelImpl(
       {required this.id,
-      required this.name,
-      required this.description,
-      required this.price,
-      @JsonKey(name: 'image_url') required this.imageUrl,
-      @JsonKey(name: 'store_id') required this.storeId,
-      @JsonKey(name: 'store_name') required this.storeName,
-      this.category,
-      this.stock = 0,
-      this.rating = 0.0,
-      @JsonKey(name: 'review_count') this.reviewCount = 0})
+      @JsonKey(name: 'lojista_id') required this.lojistaId,
+      @JsonKey(name: 'categoria_id') this.categoriaId,
+      required this.nome,
+      this.descricao,
+      required this.preco,
+      @JsonKey(name: 'preco_promocional') this.precoPromocional,
+      this.custo,
+      this.estoque = 0,
+      @JsonKey(name: 'estoque_minimo') this.estoqueMinimo = 1,
+      @JsonKey(name: 'controla_estoque') this.controlaEstoque = true,
+      this.sku,
+      @JsonKey(name: 'codigo_barras') this.codigoBarras,
+      this.ativo = true,
+      this.ordem = 0,
+      @JsonKey(name: 'criado_em') this.criadoEm,
+      @JsonKey(name: 'atualizado_em') this.atualizadoEm})
       : super._();
 
   factory _$ProductModelImpl.fromJson(Map<String, dynamic> json) =>
@@ -261,35 +349,52 @@ class _$ProductModelImpl extends _ProductModel {
   @override
   final String id;
   @override
-  final String name;
+  @JsonKey(name: 'lojista_id')
+  final String lojistaId;
   @override
-  final String description;
+  @JsonKey(name: 'categoria_id')
+  final String? categoriaId;
   @override
-  final double price;
+  final String nome;
   @override
-  @JsonKey(name: 'image_url')
-  final String imageUrl;
+  final String? descricao;
   @override
-  @JsonKey(name: 'store_id')
-  final String storeId;
+  final String preco;
   @override
-  @JsonKey(name: 'store_name')
-  final String storeName;
+  @JsonKey(name: 'preco_promocional')
+  final String? precoPromocional;
   @override
-  final String? category;
-  @override
-  @JsonKey()
-  final int stock;
+  final String? custo;
   @override
   @JsonKey()
-  final double rating;
+  final int estoque;
   @override
-  @JsonKey(name: 'review_count')
-  final int reviewCount;
+  @JsonKey(name: 'estoque_minimo')
+  final int estoqueMinimo;
+  @override
+  @JsonKey(name: 'controla_estoque')
+  final bool controlaEstoque;
+  @override
+  final String? sku;
+  @override
+  @JsonKey(name: 'codigo_barras')
+  final String? codigoBarras;
+  @override
+  @JsonKey()
+  final bool ativo;
+  @override
+  @JsonKey()
+  final int ordem;
+  @override
+  @JsonKey(name: 'criado_em')
+  final String? criadoEm;
+  @override
+  @JsonKey(name: 'atualizado_em')
+  final String? atualizadoEm;
 
   @override
   String toString() {
-    return 'ProductModel(id: $id, name: $name, description: $description, price: $price, imageUrl: $imageUrl, storeId: $storeId, storeName: $storeName, category: $category, stock: $stock, rating: $rating, reviewCount: $reviewCount)';
+    return 'ProductModel(id: $id, lojistaId: $lojistaId, categoriaId: $categoriaId, nome: $nome, descricao: $descricao, preco: $preco, precoPromocional: $precoPromocional, custo: $custo, estoque: $estoque, estoqueMinimo: $estoqueMinimo, controlaEstoque: $controlaEstoque, sku: $sku, codigoBarras: $codigoBarras, ativo: $ativo, ordem: $ordem, criadoEm: $criadoEm, atualizadoEm: $atualizadoEm)';
   }
 
   @override
@@ -298,27 +403,54 @@ class _$ProductModelImpl extends _ProductModel {
         (other.runtimeType == runtimeType &&
             other is _$ProductModelImpl &&
             (identical(other.id, id) || other.id == id) &&
-            (identical(other.name, name) || other.name == name) &&
-            (identical(other.description, description) ||
-                other.description == description) &&
-            (identical(other.price, price) || other.price == price) &&
-            (identical(other.imageUrl, imageUrl) ||
-                other.imageUrl == imageUrl) &&
-            (identical(other.storeId, storeId) || other.storeId == storeId) &&
-            (identical(other.storeName, storeName) ||
-                other.storeName == storeName) &&
-            (identical(other.category, category) ||
-                other.category == category) &&
-            (identical(other.stock, stock) || other.stock == stock) &&
-            (identical(other.rating, rating) || other.rating == rating) &&
-            (identical(other.reviewCount, reviewCount) ||
-                other.reviewCount == reviewCount));
+            (identical(other.lojistaId, lojistaId) ||
+                other.lojistaId == lojistaId) &&
+            (identical(other.categoriaId, categoriaId) ||
+                other.categoriaId == categoriaId) &&
+            (identical(other.nome, nome) || other.nome == nome) &&
+            (identical(other.descricao, descricao) ||
+                other.descricao == descricao) &&
+            (identical(other.preco, preco) || other.preco == preco) &&
+            (identical(other.precoPromocional, precoPromocional) ||
+                other.precoPromocional == precoPromocional) &&
+            (identical(other.custo, custo) || other.custo == custo) &&
+            (identical(other.estoque, estoque) || other.estoque == estoque) &&
+            (identical(other.estoqueMinimo, estoqueMinimo) ||
+                other.estoqueMinimo == estoqueMinimo) &&
+            (identical(other.controlaEstoque, controlaEstoque) ||
+                other.controlaEstoque == controlaEstoque) &&
+            (identical(other.sku, sku) || other.sku == sku) &&
+            (identical(other.codigoBarras, codigoBarras) ||
+                other.codigoBarras == codigoBarras) &&
+            (identical(other.ativo, ativo) || other.ativo == ativo) &&
+            (identical(other.ordem, ordem) || other.ordem == ordem) &&
+            (identical(other.criadoEm, criadoEm) ||
+                other.criadoEm == criadoEm) &&
+            (identical(other.atualizadoEm, atualizadoEm) ||
+                other.atualizadoEm == atualizadoEm));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, id, name, description, price,
-      imageUrl, storeId, storeName, category, stock, rating, reviewCount);
+  int get hashCode => Object.hash(
+      runtimeType,
+      id,
+      lojistaId,
+      categoriaId,
+      nome,
+      descricao,
+      preco,
+      precoPromocional,
+      custo,
+      estoque,
+      estoqueMinimo,
+      controlaEstoque,
+      sku,
+      codigoBarras,
+      ativo,
+      ordem,
+      criadoEm,
+      atualizadoEm);
 
   /// Create a copy of ProductModel
   /// with the given fields replaced by the non-null parameter values.
@@ -339,16 +471,22 @@ class _$ProductModelImpl extends _ProductModel {
 abstract class _ProductModel extends ProductModel {
   const factory _ProductModel(
           {required final String id,
-          required final String name,
-          required final String description,
-          required final double price,
-          @JsonKey(name: 'image_url') required final String imageUrl,
-          @JsonKey(name: 'store_id') required final String storeId,
-          @JsonKey(name: 'store_name') required final String storeName,
-          final String? category,
-          final int stock,
-          final double rating,
-          @JsonKey(name: 'review_count') final int reviewCount}) =
+          @JsonKey(name: 'lojista_id') required final String lojistaId,
+          @JsonKey(name: 'categoria_id') final String? categoriaId,
+          required final String nome,
+          final String? descricao,
+          required final String preco,
+          @JsonKey(name: 'preco_promocional') final String? precoPromocional,
+          final String? custo,
+          final int estoque,
+          @JsonKey(name: 'estoque_minimo') final int estoqueMinimo,
+          @JsonKey(name: 'controla_estoque') final bool controlaEstoque,
+          final String? sku,
+          @JsonKey(name: 'codigo_barras') final String? codigoBarras,
+          final bool ativo,
+          final int ordem,
+          @JsonKey(name: 'criado_em') final String? criadoEm,
+          @JsonKey(name: 'atualizado_em') final String? atualizadoEm}) =
       _$ProductModelImpl;
   const _ProductModel._() : super._();
 
@@ -358,29 +496,45 @@ abstract class _ProductModel extends ProductModel {
   @override
   String get id;
   @override
-  String get name;
+  @JsonKey(name: 'lojista_id')
+  String get lojistaId;
   @override
-  String get description;
+  @JsonKey(name: 'categoria_id')
+  String? get categoriaId;
   @override
-  double get price;
+  String get nome;
   @override
-  @JsonKey(name: 'image_url')
-  String get imageUrl;
+  String? get descricao;
   @override
-  @JsonKey(name: 'store_id')
-  String get storeId;
+  String get preco;
   @override
-  @JsonKey(name: 'store_name')
-  String get storeName;
+  @JsonKey(name: 'preco_promocional')
+  String? get precoPromocional;
   @override
-  String? get category;
+  String? get custo;
   @override
-  int get stock;
+  int get estoque;
   @override
-  double get rating;
+  @JsonKey(name: 'estoque_minimo')
+  int get estoqueMinimo;
   @override
-  @JsonKey(name: 'review_count')
-  int get reviewCount;
+  @JsonKey(name: 'controla_estoque')
+  bool get controlaEstoque;
+  @override
+  String? get sku;
+  @override
+  @JsonKey(name: 'codigo_barras')
+  String? get codigoBarras;
+  @override
+  bool get ativo;
+  @override
+  int get ordem;
+  @override
+  @JsonKey(name: 'criado_em')
+  String? get criadoEm;
+  @override
+  @JsonKey(name: 'atualizado_em')
+  String? get atualizadoEm;
 
   /// Create a copy of ProductModel
   /// with the given fields replaced by the non-null parameter values.

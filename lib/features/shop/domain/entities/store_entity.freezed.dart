@@ -26,6 +26,7 @@ mixin _$StoreEntity {
   String? get description => throw _privateConstructorUsedError;
   String? get address => throw _privateConstructorUsedError;
   String? get phone => throw _privateConstructorUsedError;
+  String? get cityId => throw _privateConstructorUsedError;
   bool get isOpen => throw _privateConstructorUsedError;
 
   /// Create a copy of StoreEntity
@@ -52,6 +53,7 @@ abstract class $StoreEntityCopyWith<$Res> {
       String? description,
       String? address,
       String? phone,
+      String? cityId,
       bool isOpen});
 }
 
@@ -80,6 +82,7 @@ class _$StoreEntityCopyWithImpl<$Res, $Val extends StoreEntity>
     Object? description = freezed,
     Object? address = freezed,
     Object? phone = freezed,
+    Object? cityId = freezed,
     Object? isOpen = null,
   }) {
     return _then(_value.copyWith(
@@ -123,6 +126,10 @@ class _$StoreEntityCopyWithImpl<$Res, $Val extends StoreEntity>
           ? _value.phone
           : phone // ignore: cast_nullable_to_non_nullable
               as String?,
+      cityId: freezed == cityId
+          ? _value.cityId
+          : cityId // ignore: cast_nullable_to_non_nullable
+              as String?,
       isOpen: null == isOpen
           ? _value.isOpen
           : isOpen // ignore: cast_nullable_to_non_nullable
@@ -150,6 +157,7 @@ abstract class _$$StoreEntityImplCopyWith<$Res>
       String? description,
       String? address,
       String? phone,
+      String? cityId,
       bool isOpen});
 }
 
@@ -176,6 +184,7 @@ class __$$StoreEntityImplCopyWithImpl<$Res>
     Object? description = freezed,
     Object? address = freezed,
     Object? phone = freezed,
+    Object? cityId = freezed,
     Object? isOpen = null,
   }) {
     return _then(_$StoreEntityImpl(
@@ -219,6 +228,10 @@ class __$$StoreEntityImplCopyWithImpl<$Res>
           ? _value.phone
           : phone // ignore: cast_nullable_to_non_nullable
               as String?,
+      cityId: freezed == cityId
+          ? _value.cityId
+          : cityId // ignore: cast_nullable_to_non_nullable
+              as String?,
       isOpen: null == isOpen
           ? _value.isOpen
           : isOpen // ignore: cast_nullable_to_non_nullable
@@ -241,6 +254,7 @@ class _$StoreEntityImpl implements _StoreEntity {
       this.description,
       this.address,
       this.phone,
+      this.cityId,
       this.isOpen = true});
 
   @override
@@ -264,12 +278,14 @@ class _$StoreEntityImpl implements _StoreEntity {
   @override
   final String? phone;
   @override
+  final String? cityId;
+  @override
   @JsonKey()
   final bool isOpen;
 
   @override
   String toString() {
-    return 'StoreEntity(id: $id, name: $name, category: $category, imageUrl: $imageUrl, rating: $rating, deliveryTime: $deliveryTime, deliveryFee: $deliveryFee, description: $description, address: $address, phone: $phone, isOpen: $isOpen)';
+    return 'StoreEntity(id: $id, name: $name, category: $category, imageUrl: $imageUrl, rating: $rating, deliveryTime: $deliveryTime, deliveryFee: $deliveryFee, description: $description, address: $address, phone: $phone, cityId: $cityId, isOpen: $isOpen)';
   }
 
   @override
@@ -292,12 +308,25 @@ class _$StoreEntityImpl implements _StoreEntity {
                 other.description == description) &&
             (identical(other.address, address) || other.address == address) &&
             (identical(other.phone, phone) || other.phone == phone) &&
+            (identical(other.cityId, cityId) || other.cityId == cityId) &&
             (identical(other.isOpen, isOpen) || other.isOpen == isOpen));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, id, name, category, imageUrl,
-      rating, deliveryTime, deliveryFee, description, address, phone, isOpen);
+  int get hashCode => Object.hash(
+      runtimeType,
+      id,
+      name,
+      category,
+      imageUrl,
+      rating,
+      deliveryTime,
+      deliveryFee,
+      description,
+      address,
+      phone,
+      cityId,
+      isOpen);
 
   /// Create a copy of StoreEntity
   /// with the given fields replaced by the non-null parameter values.
@@ -320,6 +349,7 @@ abstract class _StoreEntity implements StoreEntity {
       final String? description,
       final String? address,
       final String? phone,
+      final String? cityId,
       final bool isOpen}) = _$StoreEntityImpl;
 
   @override
@@ -342,6 +372,8 @@ abstract class _StoreEntity implements StoreEntity {
   String? get address;
   @override
   String? get phone;
+  @override
+  String? get cityId;
   @override
   bool get isOpen;
 

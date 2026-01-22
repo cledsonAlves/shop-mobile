@@ -2,315 +2,433 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import '../../../../theme/app_theme.dart';
-import '../../../../core/mocks/mock_data.dart';
+import '../providers/city_api_provider.dart';
 import '../providers/mock_providers.dart';
-import '../widgets/store_card.dart';
+import '../providers/order_provider.dart';
 import '../widgets/product_card.dart';
+import '../../data/models/city_model.dart';
+import '../../domain/entities/store_entity.dart';
 
 class HomeScreen extends ConsumerWidget {
   const HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final categoriesAsync = ref.watch(categoriesProvider);
+    // Inicializa a cidade selecionada se necessário
+    ref.watch(initSelectedCityProvider);
+    
+    final filteredProductsAsync = ref.watch(filteredProductsProvider);
     final storesAsync = ref.watch(storesProvider);
-    final productsAsync = ref.watch(productsProvider);
+    final selectedStoreId = ref.watch(selectedStoreFilterProvider);
+    final selectedCity = ref.watch(selectedCityApiProvider);
+    final citiesAsync = ref.watch(citiesApiProvider);
 
     return Scaffold(
       backgroundColor: const Color(0xFFFCF9F8),
       body: SafeArea(
-        child: CustomScrollView(
-          slivers: [
-            // Header
-            SliverToBoxAdapter(
-              child: Container(
-                padding: const EdgeInsets.all(16),
-                decoration: BoxDecoration(
-                  color: const Color(0xFFFCF9F8).withOpacity(0.95),
-                  border: Border(bottom: BorderSide(color: Colors.grey.shade100)),
-                ),
-                child: Column(
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Row(
-                          children: [
-                            Icon(Icons.location_on, color: AppTheme.primaryColor, size: 24),
-                            const SizedBox(width: 8),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text('Você está em', style: TextStyle(fontSize: 12, color: Colors.grey[600])),
-                                Row(
-                                  children: [
-                                    const Text('Jarinu – SP', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
-                                    Icon(Icons.expand_more, size: 20, color: Colors.grey[800]),
-                                  ],
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
-                        Container(
-                          width: 40,
-                          height: 40,
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(20),
-                            boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.05), blurRadius: 8)],
-                          ),
-                          child: Stack(
+        child: ListView(
+          children: [
+            // Header simples
+            Container(
+              padding: const EdgeInsets.all(16),
+              decoration: BoxDecoration(
+                color: const Color(0xFFFCF9F8).withOpacity(0.95),
+                border: Border(bottom: BorderSide(color: Colors.grey.shade100)),
+              ),
+              child: Column(
+                children: [
+                  // Localização e notificações
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Expanded(
+                        child: GestureDetector(
+                          onTap: () {
+                            citiesAsync.whenData((cities) {
+                              _showCityModal(context, ref, cities, selectedCity);
+                            });
+                          },
+                          child: Row(
                             children: [
-                              const Center(child: Icon(Icons.notifications_outlined, size: 24)),
-                              Positioned(
-                                top: 8,
-                                right: 8,
-                                child: Container(
-                                  width: 10,
-                                  height: 10,
-                                  decoration: BoxDecoration(
-                                    color: AppTheme.primaryColor,
-                                    borderRadius: BorderRadius.circular(5),
-                                    border: Border.all(color: Colors.white, width: 2),
-                                  ),
+                              Icon(Icons.location_on, color: AppTheme.primaryColor, size: 20),
+                              const SizedBox(width: 8),
+                              Flexible(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      'Você está em',
+                                      style: TextStyle(fontSize: 11, color: Colors.grey[600]),
+                                    ),
+                                    Row(
+                                      children: [
+                                        Flexible(
+                                          child: Text(
+                                            selectedCity != null 
+                                                ? '${selectedCity.nome} – ${selectedCity.estado}'
+                                                : 'Selecione uma cidade',
+                                            style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+                                            overflow: TextOverflow.ellipsis,
+                                          ),
+                                        ),
+                                        const SizedBox(width: 4),
+                                        Icon(Icons.keyboard_arrow_down, size: 16, color: Colors.grey[600]),
+                                      ],
+                                    ),
+                                  ],
                                 ),
                               ),
                             ],
                           ),
                         ),
-                      ],
-                    ),
-                    const SizedBox(height: 16),
-                    // Search Bar
-                    Container(
-                      height: 48,
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(12),
-                        boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.04), blurRadius: 8)],
                       ),
-                      child: Row(
-                        children: [
-                          const SizedBox(width: 16),
-                          Icon(Icons.search, color: Colors.grey[400], size: 24),
-                          const SizedBox(width: 12),
-                          Expanded(
-                            child: TextField(
-                              decoration: InputDecoration(
-                                hintText: 'Buscar produtos ou lojas',
-                                hintStyle: TextStyle(color: Colors.grey[400], fontSize: 16),
-                                border: InputBorder.none,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-
-            // Banner Promocional
-            SliverToBoxAdapter(
-              child: Padding(
-                padding: const EdgeInsets.all(16),
-                child: Container(
-                  height: 160,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(16),
-                    gradient: const LinearGradient(
-                      colors: [Color(0xFFf06e42), Color(0xFFFF8A65)],
-                      begin: Alignment.centerLeft,
-                      end: Alignment.centerRight,
-                    ),
-                  ),
-                  child: Stack(
-                    children: [
-                      Positioned(
-                        right: 0,
-                        top: 0,
-                        bottom: 0,
-                        child: ClipRRect(
-                          borderRadius: const BorderRadius.horizontal(right: Radius.circular(16)),
-                          child: Image.network(
-                            'https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?w=300',
-                            width: 150,
-                            fit: BoxFit.cover,
-                            color: Colors.black.withOpacity(0.3),
-                            colorBlendMode: BlendMode.darken,
-                          ),
+                      // Ícone do carrinho
+                      _buildCartIcon(context, ref),
+                      const SizedBox(width: 8),
+                      // Ícone de notificações
+                      Container(
+                        width: 40,
+                        height: 40,
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(20),
+                          boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.05), blurRadius: 8)],
                         ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(20),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
+                        child: Stack(
                           children: [
-                            Container(
-                              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                              decoration: BoxDecoration(
-                                color: Colors.white.withOpacity(0.2),
-                                borderRadius: BorderRadius.circular(6),
+                            const Center(child: Icon(Icons.notifications_outlined, size: 24)),
+                            Positioned(
+                              top: 8,
+                              right: 8,
+                              child: Container(
+                                width: 10,
+                                height: 10,
+                                decoration: BoxDecoration(
+                                  color: AppTheme.primaryColor,
+                                  borderRadius: BorderRadius.circular(5),
+                                  border: Border.all(color: Colors.white, width: 2),
+                                ),
                               ),
-                              child: const Text('ENTREGA GRÁTIS', style: TextStyle(color: Colors.white, fontSize: 10, fontWeight: FontWeight.bold)),
                             ),
-                            const SizedBox(height: 12),
-                            const Text('Ofertas da\nsemana em\nJarinu', style: TextStyle(color: Colors.white, fontSize: 22, fontWeight: FontWeight.bold, height: 1.2)),
-                            const SizedBox(height: 8),
-                            Text('Produtos selecionados com até 30% OFF', style: TextStyle(color: Colors.white.withOpacity(0.9), fontSize: 12)),
                           ],
                         ),
                       ),
                     ],
                   ),
-                ),
-              ),
-            ),
-
-            // Categorias
-            SliverToBoxAdapter(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    const Text('Categorias', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
-                    Text('Ver todas', style: TextStyle(color: AppTheme.primaryColor, fontWeight: FontWeight.w600)),
-                  ],
-                ),
-              ),
-            ),
-            SliverToBoxAdapter(
-              child: SizedBox(
-                height: 110,
-                child: categoriesAsync.when(
-                  data: (categories) => ListView.builder(
-                    scrollDirection: Axis.horizontal,
-                    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-                    itemCount: categories.length,
-                    itemBuilder: (context, index) {
-                      final category = categories[index];
-                      final colors = [
-                        const Color(0xFFFFE0D6),
-                        const Color(0xFFE3F2FD),
-                        const Color(0xFFE8F5E9),
-                        const Color(0xFFF3E5F5),
-                        const Color(0xFFFFF3E0),
-                      ];
-                      final iconColors = [
-                        AppTheme.primaryColor,
-                        const Color(0xFF2196F3),
-                        const Color(0xFF4CAF50),
-                        const Color(0xFF9C27B0),
-                        const Color(0xFFFF9800),
-                      ];
-                      return Padding(
-                        padding: const EdgeInsets.only(right: 16),
-                        child: Column(
-                          children: [
-                            Container(
-                              width: 64,
-                              height: 64,
-                              decoration: BoxDecoration(
-                                color: colors[index % colors.length],
-                                borderRadius: BorderRadius.circular(16),
-                              ),
-                              child: Icon(_getCategoryIcon(category.icon), color: iconColors[index % iconColors.length], size: 32),
+                  const SizedBox(height: 12),
+                  // Search Bar
+                  Container(
+                    height: 48,
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(12),
+                      boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.04), blurRadius: 8)],
+                    ),
+                    child: Row(
+                      children: [
+                        const SizedBox(width: 16),
+                        Icon(Icons.search, color: Colors.grey[400], size: 24),
+                        const SizedBox(width: 12),
+                        Expanded(
+                          child: TextField(
+                            decoration: InputDecoration(
+                              hintText: 'Buscar produtos',
+                              hintStyle: TextStyle(color: Colors.grey[400], fontSize: 14),
+                              border: InputBorder.none,
                             ),
-                            const SizedBox(height: 8),
-                            Text(category.name, style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w500)),
-                          ],
+                          ),
                         ),
-                      );
-                    },
-                  ),
-                  loading: () => const Center(child: CircularProgressIndicator()),
-                  error: (e, s) => Center(child: Text('Erro: $e')),
-                ),
-              ),
-            ),
-
-            // Lojas em Destaque
-            SliverToBoxAdapter(
-              child: Padding(
-                padding: const EdgeInsets.fromLTRB(16, 16, 16, 12),
-                child: const Text('Lojas em Destaque', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
-              ),
-            ),
-            SliverToBoxAdapter(
-              child: SizedBox(
-                height: 200,
-                child: storesAsync.when(
-                  data: (stores) => ListView.builder(
-                    scrollDirection: Axis.horizontal,
-                    padding: const EdgeInsets.symmetric(horizontal: 16),
-                    itemCount: stores.length,
-                    itemBuilder: (context, index) => Padding(
-                      padding: const EdgeInsets.only(right: 16),
-                      child: StoreCard(store: stores[index]),
+                      ],
                     ),
                   ),
-                  loading: () => const Center(child: CircularProgressIndicator()),
-                  error: (e, s) => Center(child: Text('Erro: $e')),
-                ),
+                ],
               ),
             ),
-
             // Vitrine Local
-            SliverToBoxAdapter(
-              child: Padding(
-                padding: const EdgeInsets.fromLTRB(16, 24, 16, 12),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    const Text('Vitrine Local', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
-                    Icon(Icons.tune, color: Colors.grey[600]),
-                  ],
-                ),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(16, 24, 16, 16),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Text(
+                        'Produtos em Destaque',
+                        style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                      ),
+                      if (selectedCity != null)
+                        Text(
+                          'em ${selectedCity.nome}',
+                          style: TextStyle(fontSize: 12, color: Colors.grey[600]),
+                        ),
+                    ],
+                  ),
+                  Icon(Icons.tune, color: Colors.grey[600], size: 20),
+                ],
               ),
             ),
-            productsAsync.when(
-              data: (products) => SliverPadding(
-                padding: const EdgeInsets.symmetric(horizontal: 16),
-                sliver: SliverGrid(
+            
+            // Filtro por Lojistas
+            storesAsync.when(
+              data: (stores) {
+                if (stores.isEmpty) return const SizedBox.shrink();
+                return Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 16),
+                      child: Text(
+                        'Filtrar por Loja',
+                        style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600, color: Colors.grey[700]),
+                      ),
+                    ),
+                    const SizedBox(height: 8),
+                    SizedBox(
+                      height: 44,
+                      child: ListView.builder(
+                        scrollDirection: Axis.horizontal,
+                        padding: const EdgeInsets.symmetric(horizontal: 12),
+                        itemCount: stores.length + 1, // +1 para "Todos"
+                        itemBuilder: (context, index) {
+                          if (index == 0) {
+                            // Opção "Todos"
+                            final isSelected = selectedStoreId == null;
+                            return Padding(
+                              padding: const EdgeInsets.symmetric(horizontal: 4),
+                              child: ChoiceChip(
+                                label: const Text('Todos'),
+                                selected: isSelected,
+                                onSelected: (_) {
+                                  ref.read(selectedStoreFilterProvider.notifier).state = null;
+                                },
+                                selectedColor: AppTheme.primaryColor,
+                                labelStyle: TextStyle(
+                                  color: isSelected ? Colors.white : Colors.grey[700],
+                                  fontWeight: FontWeight.w500,
+                                ),
+                                backgroundColor: Colors.white,
+                                side: BorderSide(color: isSelected ? AppTheme.primaryColor : Colors.grey.shade300),
+                              ),
+                            );
+                          }
+                          
+                          final store = stores[index - 1];
+                          final isSelected = selectedStoreId == store.id;
+                          return Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 4),
+                            child: ChoiceChip(
+                              avatar: isSelected ? null : CircleAvatar(
+                                backgroundImage: NetworkImage(
+                                  'https://ui-avatars.com/api/?name=${Uri.encodeComponent(store.name)}&background=f06e42&color=fff&size=32',
+                                ),
+                                radius: 12,
+                              ),
+                              label: Text(store.name),
+                              selected: isSelected,
+                              onSelected: (_) {
+                                ref.read(selectedStoreFilterProvider.notifier).state = store.id;
+                              },
+                              selectedColor: AppTheme.primaryColor,
+                              labelStyle: TextStyle(
+                                color: isSelected ? Colors.white : Colors.grey[700],
+                                fontWeight: FontWeight.w500,
+                              ),
+                              backgroundColor: Colors.white,
+                              side: BorderSide(color: isSelected ? AppTheme.primaryColor : Colors.grey.shade300),
+                            ),
+                          );
+                        },
+                      ),
+                    ),
+                    const SizedBox(height: 16),
+                  ],
+                );
+              },
+              loading: () => const SizedBox.shrink(),
+              error: (_, __) => const SizedBox.shrink(),
+            ),
+            
+            // Grid de produtos
+            filteredProductsAsync.when(
+              data: (products) {
+                if (products.isEmpty) {
+                  return Center(
+                    child: Padding(
+                      padding: const EdgeInsets.all(32),
+                      child: Column(
+                        children: [
+                          Icon(Icons.storefront_outlined, size: 64, color: Colors.grey[400]),
+                          const SizedBox(height: 16),
+                          Text(
+                            selectedCity != null
+                                ? 'Nenhum produto disponível em ${selectedCity.nome}'
+                                : 'Nenhum produto disponível',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(color: Colors.grey[600]),
+                          ),
+                          const SizedBox(height: 8),
+                          TextButton(
+                            onPressed: () {
+                              citiesAsync.whenData((cities) {
+                                _showCityModal(context, ref, cities, selectedCity);
+                              });
+                            },
+                            child: const Text('Alterar cidade'),
+                          ),
+                        ],
+                      ),
+                    ),
+                  );
+                }
+                return GridView.builder(
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 2,
-                    childAspectRatio: 0.65,
-                    crossAxisSpacing: 16,
-                    mainAxisSpacing: 16,
+                    childAspectRatio: 0.6,
+                    crossAxisSpacing: 12,
+                    mainAxisSpacing: 12,
                   ),
-                  delegate: SliverChildBuilderDelegate(
-                    (context, index) => ProductCard(product: products[index]),
-                    childCount: products.length,
-                  ),
-                ),
+                  itemCount: products.length,
+                  itemBuilder: (context, index) => ProductCard(product: products[index]),
+                );
+              },
+              loading: () => const Padding(
+                padding: EdgeInsets.all(32),
+                child: Center(child: CircularProgressIndicator()),
               ),
-              loading: () => const SliverToBoxAdapter(child: Center(child: CircularProgressIndicator())),
-              error: (e, s) => SliverToBoxAdapter(child: Center(child: Text('Erro: $e'))),
+              error: (e, s) => Padding(
+                padding: const EdgeInsets.all(32),
+                child: Text('Erro ao carregar: $e'),
+              ),
             ),
-            const SliverToBoxAdapter(child: SizedBox(height: 100)),
+            const SizedBox(height: 32),
           ],
         ),
       ),
     );
   }
 
-  IconData _getCategoryIcon(String iconName) {
-    switch (iconName) {
-      case 'sports_esports':
-        return Icons.sports_esports;
-      case 'construction':
-        return Icons.construction;
-      case 'kitchen':
-        return Icons.kitchen;
-      case 'apparel':
-        return Icons.checkroom;
-      case 'cooking':
-        return Icons.restaurant;
-      default:
-        return Icons.category;
-    }
+  void _showCityModal(BuildContext context, WidgetRef ref, List<CityModel> cities, CityModel? selectedCity) {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+      ),
+      builder: (context) => DraggableScrollableSheet(
+        initialChildSize: 0.5,
+        maxChildSize: 0.9,
+        minChildSize: 0.3,
+        expand: false,
+        builder: (context, scrollController) => Container(
+          padding: const EdgeInsets.all(20),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Center(
+                child: Container(
+                  width: 40,
+                  height: 4,
+                  decoration: BoxDecoration(
+                    color: Colors.grey[300],
+                    borderRadius: BorderRadius.circular(2),
+                  ),
+                ),
+              ),
+              const SizedBox(height: 16),
+              const Text(
+                'Selecione sua cidade',
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              ),
+              const SizedBox(height: 8),
+              Text(
+                'Mostraremos apenas produtos de lojas da sua região',
+                style: TextStyle(fontSize: 13, color: Colors.grey[600]),
+              ),
+              const SizedBox(height: 16),
+              Expanded(
+                child: ListView.builder(
+                  controller: scrollController,
+                  itemCount: cities.length,
+                  itemBuilder: (context, index) {
+                    final city = cities[index];
+                    final isSelected = selectedCity?.id == city.id;
+                    return ListTile(
+                      onTap: () {
+                        ref.read(selectedCityApiProvider.notifier).state = city;
+                        Navigator.pop(context);
+                      },
+                      leading: Icon(
+                        Icons.location_city,
+                        color: isSelected ? AppTheme.primaryColor : Colors.grey[400],
+                      ),
+                      title: Text(
+                        city.nome,
+                        style: TextStyle(
+                          fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
+                          color: isSelected ? AppTheme.primaryColor : Colors.black,
+                        ),
+                      ),
+                      subtitle: Text(city.estado),
+                      trailing: isSelected
+                          ? Icon(Icons.check_circle, color: AppTheme.primaryColor)
+                          : null,
+                    );
+                  },
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildCartIcon(BuildContext context, WidgetRef ref) {
+    final cartItemCount = ref.watch(cartItemCountProvider);
+    
+    return GestureDetector(
+      onTap: () => context.push('/cart'),
+      child: Container(
+        width: 40,
+        height: 40,
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(20),
+          boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.05), blurRadius: 8)],
+        ),
+        child: Stack(
+          children: [
+            const Center(child: Icon(Icons.shopping_cart_outlined, size: 24)),
+            if (cartItemCount > 0)
+              Positioned(
+                top: 4,
+                right: 4,
+                child: Container(
+                  padding: const EdgeInsets.all(4),
+                  decoration: BoxDecoration(
+                    color: AppTheme.primaryColor,
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  constraints: const BoxConstraints(minWidth: 18, minHeight: 18),
+                  child: Text(
+                    cartItemCount > 99 ? '99+' : '$cartItemCount',
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 10,
+                      fontWeight: FontWeight.bold,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+              ),
+          ],
+        ),
+      ),
+    );
   }
 }

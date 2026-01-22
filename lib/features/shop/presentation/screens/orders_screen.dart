@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import '../../../../theme/app_theme.dart';
-import '../../../../core/mocks/mock_data.dart';
+import '../providers/order_provider.dart';
+import '../providers/mock_providers.dart';
+import '../../domain/entities/order_entity.dart';
 
 class OrdersScreen extends ConsumerStatefulWidget {
   const OrdersScreen({super.key});
@@ -28,9 +30,8 @@ class _OrdersScreenState extends ConsumerState<OrdersScreen> with SingleTickerPr
 
   @override
   Widget build(BuildContext context) {
-    final orders = MockData.orders;
-    final activeOrders = orders.where((o) => o.isActive).toList();
-    final completedOrders = orders.where((o) => !o.isActive).toList();
+    final activeOrdersAsync = ref.watch(activeOrdersProvider);
+    final completedOrdersAsync = ref.watch(completedOrdersProvider);
 
     return Scaffold(
       backgroundColor: const Color(0xFFFCF9F8),
@@ -86,9 +87,17 @@ class _OrdersScreenState extends ConsumerState<OrdersScreen> with SingleTickerPr
               controller: _tabController,
               children: [
                 // Em andamento
-                _buildActiveOrdersList(activeOrders),
+                activeOrdersAsync.when(
+                  data: (orders) => _buildActiveOrdersList(orders),
+                  loading: () => const Center(child: CircularProgressIndicator()),
+                  error: (_, __) => _buildErrorState(() => ref.invalidate(activeOrdersProvider)),
+                ),
                 // Concluídos
-                _buildCompletedOrdersList(completedOrders),
+                completedOrdersAsync.when(
+                  data: (orders) => _buildCompletedOrdersList(orders),
+                  loading: () => const Center(child: CircularProgressIndicator()),
+                  error: (_, __) => _buildErrorState(() => ref.invalidate(completedOrdersProvider)),
+                ),
               ],
             ),
           ),
@@ -97,7 +106,25 @@ class _OrdersScreenState extends ConsumerState<OrdersScreen> with SingleTickerPr
     );
   }
 
-  Widget _buildActiveOrdersList(List<MockOrderData> orders) {
+  Widget _buildErrorState(VoidCallback onRetry) {
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Icon(Icons.error_outline, size: 48, color: Colors.red[300]),
+          const SizedBox(height: 16),
+          const Text('Erro ao carregar pedidos'),
+          TextButton.icon(
+            onPressed: onRetry,
+            icon: const Icon(Icons.refresh),
+            label: const Text('Tentar novamente'),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildActiveOrdersList(List<OrderEntity> orders) {
     if (orders.isEmpty) {
       return _buildEmptyState('Nenhum pedido em andamento');
     }
@@ -109,7 +136,7 @@ class _OrdersScreenState extends ConsumerState<OrdersScreen> with SingleTickerPr
     );
   }
 
-  Widget _buildCompletedOrdersList(List<MockOrderData> orders) {
+  Widget _buildCompletedOrdersList(List<OrderEntity> orders) {
     if (orders.isEmpty) {
       return _buildEmptyState('Nenhum pedido concluído');
     }
@@ -146,7 +173,15 @@ class _OrdersScreenState extends ConsumerState<OrdersScreen> with SingleTickerPr
     );
   }
 
-  Widget _buildActiveOrderCard(MockOrderData order) {
+  Widget _buildActiveOrderCard(OrderEntity order) {
+    final storeNameAsync = ref.watch(storeNameProvider(order.lojistaId));
+    final storeName = storeNameAsync.when(
+      data: (name) => name,
+      loading: () => 'Carregando...',
+      error: (_, __) => order.nomeLojista ?? 'Loja',
+    );
+    final storeLogoUrl = 'https://ui-avatars.com/api/?name=${Uri.encodeComponent(storeName)}&background=f06e42&color=fff';
+
     return Container(
       margin: const EdgeInsets.only(bottom: 16),
       padding: const EdgeInsets.all(16),
@@ -168,23 +203,23 @@ class _OrdersScreenState extends ConsumerState<OrdersScreen> with SingleTickerPr
                     width: 8,
                     height: 8,
                     decoration: BoxDecoration(
-                      color: AppTheme.primaryColor,
+                      color: _getStatusColor(order.status),
                       borderRadius: BorderRadius.circular(4),
                     ),
                   ),
                   const SizedBox(width: 8),
                   Text(
-                    'SAIU PARA ENTREGA',
+                    order.status.toDisplayString().toUpperCase(),
                     style: TextStyle(
                       fontSize: 12,
                       fontWeight: FontWeight.bold,
-                      color: AppTheme.primaryColor,
+                      color: _getStatusColor(order.status),
                     ),
                   ),
                 ],
               ),
               Text(
-                'Hoje, 19:30',
+                _formatDate(order.criadoEm),
                 style: TextStyle(fontSize: 12, color: Colors.grey[500]),
               ),
             ],
@@ -197,7 +232,7 @@ class _OrdersScreenState extends ConsumerState<OrdersScreen> with SingleTickerPr
               ClipRRect(
                 borderRadius: BorderRadius.circular(12),
                 child: Image.network(
-                  order.storeLogoUrl,
+                  storeLogoUrl,
                   width: 56,
                   height: 56,
                   fit: BoxFit.cover,
@@ -208,9 +243,9 @@ class _OrdersScreenState extends ConsumerState<OrdersScreen> with SingleTickerPr
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(order.storeName, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
+                    Text(storeName, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
                     const SizedBox(height: 4),
-                    Text(order.items, style: TextStyle(fontSize: 13, color: Colors.grey[600])),
+                    Text(order.resumoItens, style: TextStyle(fontSize: 13, color: Colors.grey[600])),
                     Text('R\$ ${order.total.toStringAsFixed(2).replaceAll('.', ',')}', style: const TextStyle(fontWeight: FontWeight.w600)),
                   ],
                 ),
@@ -220,7 +255,7 @@ class _OrdersScreenState extends ConsumerState<OrdersScreen> with SingleTickerPr
           const SizedBox(height: 16),
 
           // Código de entrega
-          if (order.securityCode != null)
+          if (order.codigoConfirmacao != null)
             Container(
               padding: const EdgeInsets.all(16),
               decoration: BoxDecoration(
@@ -237,7 +272,7 @@ class _OrdersScreenState extends ConsumerState<OrdersScreen> with SingleTickerPr
                       Text('CÓDIGO DE ENTREGA', style: TextStyle(fontSize: 10, color: Colors.grey[500], letterSpacing: 0.5)),
                       const SizedBox(height: 4),
                       Text(
-                        order.securityCode!,
+                        order.codigoConfirmacao!,
                         style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold, color: AppTheme.primaryColor, letterSpacing: 4),
                       ),
                     ],
@@ -268,9 +303,15 @@ class _OrdersScreenState extends ConsumerState<OrdersScreen> with SingleTickerPr
     );
   }
 
-  Widget _buildCompletedOrderCard(MockOrderData order) {
-    final months = ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'];
-    final dateStr = '${order.date.day} ${months[order.date.month - 1]}';
+  Widget _buildCompletedOrderCard(OrderEntity order) {
+    final storeNameAsync = ref.watch(storeNameProvider(order.lojistaId));
+    final storeName = storeNameAsync.when(
+      data: (name) => name,
+      loading: () => 'Carregando...',
+      error: (_, __) => order.nomeLojista ?? 'Loja',
+    );
+    final storeLogoUrl = 'https://ui-avatars.com/api/?name=${Uri.encodeComponent(storeName)}&background=f06e42&color=fff';
+    final dateStr = _formatDate(order.criadoEm);
 
     return Container(
       margin: const EdgeInsets.only(bottom: 16),
@@ -285,7 +326,7 @@ class _OrdersScreenState extends ConsumerState<OrdersScreen> with SingleTickerPr
           ClipRRect(
             borderRadius: BorderRadius.circular(12),
             child: Image.network(
-              order.storeLogoUrl,
+              storeLogoUrl,
               width: 64,
               height: 64,
               fit: BoxFit.cover,
@@ -299,25 +340,25 @@ class _OrdersScreenState extends ConsumerState<OrdersScreen> with SingleTickerPr
                 Row(
                   children: [
                     Expanded(
-                      child: Text(order.storeName, style: const TextStyle(fontWeight: FontWeight.bold)),
+                      child: Text(storeName, style: const TextStyle(fontWeight: FontWeight.bold)),
                     ),
                     Container(
                       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                       decoration: BoxDecoration(
-                        color: Colors.green.shade50,
+                        color: _getStatusColor(order.status).withOpacity(0.1),
                         borderRadius: BorderRadius.circular(8),
                       ),
                       child: Text(
-                        'ENTREGUE',
-                        style: TextStyle(fontSize: 10, fontWeight: FontWeight.bold, color: Colors.green.shade700),
+                        order.status.toDisplayString().toUpperCase(),
+                        style: TextStyle(fontSize: 10, fontWeight: FontWeight.bold, color: _getStatusColor(order.status)),
                       ),
                     ),
                   ],
                 ),
                 const SizedBox(height: 4),
-                Text('$dateStr • Pedido ${order.orderNumber}', style: TextStyle(fontSize: 12, color: Colors.grey[500])),
+                Text('$dateStr • Pedido #${order.id.substring(0, 8.clamp(0, order.id.length))}', style: TextStyle(fontSize: 12, color: Colors.grey[500])),
                 const SizedBox(height: 4),
-                Text(order.items, style: TextStyle(fontSize: 12, color: Colors.grey[600])),
+                Text(order.resumoItens, style: TextStyle(fontSize: 12, color: Colors.grey[600])),
                 const SizedBox(height: 8),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -357,5 +398,37 @@ class _OrdersScreenState extends ConsumerState<OrdersScreen> with SingleTickerPr
         ],
       ),
     );
+  }
+
+  Color _getStatusColor(OrderStatus status) {
+    switch (status) {
+      case OrderStatus.pendente:
+        return Colors.orange;
+      case OrderStatus.confirmado:
+        return Colors.blue;
+      case OrderStatus.preparando:
+        return Colors.purple;
+      case OrderStatus.em_entrega:
+        return AppTheme.primaryColor;
+      case OrderStatus.entregue:
+        return Colors.green;
+      case OrderStatus.cancelado:
+        return Colors.red;
+    }
+  }
+
+  String _formatDate(DateTime date) {
+    final months = ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'];
+    final now = DateTime.now();
+    final today = DateTime(now.year, now.month, now.day);
+    final orderDate = DateTime(date.year, date.month, date.day);
+    
+    if (orderDate == today) {
+      return 'Hoje, ${date.hour.toString().padLeft(2, '0')}:${date.minute.toString().padLeft(2, '0')}';
+    } else if (orderDate == today.subtract(const Duration(days: 1))) {
+      return 'Ontem';
+    } else {
+      return '${date.day} ${months[date.month - 1]}';
+    }
   }
 }

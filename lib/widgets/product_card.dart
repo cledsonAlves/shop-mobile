@@ -36,6 +36,7 @@ class ProductCard extends StatelessWidget {
               padding: const EdgeInsets.all(12.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
                 children: [
                   Text(product.name, style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold), maxLines: 2, overflow: TextOverflow.ellipsis),
                   SizedBox(height: 4),
@@ -43,6 +44,7 @@ class ProductCard extends StatelessWidget {
                   SizedBox(height: 8),
                   SizedBox(
                     width: double.infinity,
+                    height: 32,
                     child: ElevatedButton(
                       onPressed: () {},
                       style: ElevatedButton.styleFrom(
