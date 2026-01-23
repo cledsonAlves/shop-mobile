@@ -60,31 +60,49 @@ class _ProductDetailScreenState extends ConsumerState<ProductDetailScreen> {
                       ),
                     ),
                     actions: [
-                      Container(
-                        margin: const EdgeInsets.only(right: 8),
-                        width: 40,
-                        height: 40,
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(20),
-                          boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.1), blurRadius: 4)],
-                        ),
-                        child: Stack(
-                          children: [
-                            const Center(child: Icon(Icons.shopping_cart_outlined, color: Colors.black)),
-                            Positioned(
-                              top: 6,
-                              right: 6,
-                              child: Container(
-                                width: 8,
-                                height: 8,
-                                decoration: BoxDecoration(
-                                  color: AppTheme.primaryColor,
-                                  borderRadius: BorderRadius.circular(4),
+                      GestureDetector(
+                        onTap: () => context.push('/cart'),
+                        child: Container(
+                          margin: const EdgeInsets.only(right: 8),
+                          width: 40,
+                          height: 40,
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(20),
+                            boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.1), blurRadius: 4)],
+                          ),
+                          child: Stack(
+                            children: [
+                              const Center(child: Icon(Icons.shopping_cart_outlined, color: Colors.black)),
+                              Positioned(
+                                top: 6,
+                                right: 6,
+                                child: Consumer(
+                                  builder: (context, ref, _) {
+                                    final cartItemCount = ref.watch(cartItemCountProvider);
+                                    if (cartItemCount == 0) return const SizedBox.shrink();
+                                    return Container(
+                                      padding: const EdgeInsets.all(4),
+                                      decoration: BoxDecoration(
+                                        color: AppTheme.primaryColor,
+                                        borderRadius: BorderRadius.circular(10),
+                                      ),
+                                      constraints: const BoxConstraints(minWidth: 18, minHeight: 18),
+                                      child: Text(
+                                        cartItemCount > 99 ? '99+' : '$cartItemCount',
+                                        style: const TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 10,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                        textAlign: TextAlign.center,
+                                      ),
+                                    );
+                                  },
                                 ),
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
                       ),
                     ],

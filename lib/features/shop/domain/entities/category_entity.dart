@@ -8,6 +8,7 @@ class CategoryEntity with _$CategoryEntity {
     required String id,
     required String name,
     required String icon,
+    String? storeId,
     String? description,
     String? imageUrl,
   }) = _CategoryEntity;

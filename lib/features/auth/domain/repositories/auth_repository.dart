@@ -9,10 +9,10 @@ abstract class AuthRepository {
     required String email,
     required String cpf,
     String? telefone,
-    String? endereco,
-    String? cidade,
-    String? estado,
-    String? cep,
+    required String endereco,
+    required String cidade,
+    required String estado,
+    required String cep,
   });
 
   /// Realiza login por CPF e retorna dados do cliente

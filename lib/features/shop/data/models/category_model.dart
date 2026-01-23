@@ -26,6 +26,7 @@ class CategoryModel with _$CategoryModel {
         id: id,
         name: nome,
         icon: '',
+        storeId: lojistaId,
         description: descricao,
         imageUrl: null,
       );

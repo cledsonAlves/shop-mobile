@@ -13,14 +13,47 @@ import 'city_api_provider.dart';
 
 // UserProfile removido - agora usando authProvider para dados do cliente
 
-// Real API providers
-final categoriesProvider = FutureProvider<List<CategoryEntity>>((ref) async {
+// Provider para categoria selecionada
+final selectedCategoryProvider = StateProvider<String?>((ref) => null);
+
+// Real API providers - todas as categorias
+final allCategoriesProvider = FutureProvider<List<CategoryEntity>>((ref) async {
   final getCategories = getIt<GetCategories>();
   final result = await getCategories.call();
   return result.fold(
     (failure) => throw Exception(failure.message),
     (categories) => categories,
   );
+});
+
+/// Provider de categorias filtradas pela cidade selecionada
+/// Mostra apenas categorias dos lojistas da cidade selecionada
+final categoriesProvider = FutureProvider<List<CategoryEntity>>((ref) async {
+  final selectedCity = ref.watch(selectedCityApiProvider);
+  final allCategories = await ref.watch(allCategoriesProvider.future);
+  
+  if (selectedCity == null) {
+    return allCategories;
+  }
+  
+  // Busca lojas da cidade selecionada
+  final storesInCity = await ref.watch(storesProvider.future);
+  final storeIdsInCity = storesInCity.map((s) => s.id).toSet();
+  
+  // Filtra categorias pelos lojistas da cidade
+  final filteredCategories = allCategories
+      .where((category) => category.storeId != null && storeIdsInCity.contains(category.storeId))
+      .toList();
+  
+  // Remove duplicatas por nome (agrupa categorias com mesmo nome)
+  final uniqueCategories = <String, CategoryEntity>{};
+  for (final category in filteredCategories) {
+    if (!uniqueCategories.containsKey(category.name.toLowerCase())) {
+      uniqueCategories[category.name.toLowerCase()] = category;
+    }
+  }
+  
+  return uniqueCategories.values.toList();
 });
 
 /// Provider de todas as lojas (sem filtro)
@@ -62,22 +95,45 @@ final allProductsProvider = FutureProvider<List<ProductEntity>>((ref) async {
   );
 });
 
-/// Provider de produtos filtrados pela cidade selecionada
+/// Provider de produtos filtrados pela cidade selecionada e categoria
 /// Mostra apenas produtos dos lojistas da cidade selecionada
 final productsProvider = FutureProvider<List<ProductEntity>>((ref) async {
   final selectedCity = ref.watch(selectedCityApiProvider);
+  final selectedCategoryId = ref.watch(selectedCategoryProvider);
   final allProducts = await ref.watch(allProductsProvider.future);
   
-  if (selectedCity == null) {
-    return allProducts;
+  var filteredProducts = allProducts;
+  
+  // Filtra por cidade
+  if (selectedCity != null) {
+    // Busca lojas da cidade selecionada
+    final storesInCity = await ref.watch(storesProvider.future);
+    final storeIdsInCity = storesInCity.map((s) => s.id).toSet();
+    
+    // Filtra produtos pelos lojistas da cidade
+    filteredProducts = filteredProducts.where((product) => storeIdsInCity.contains(product.storeId)).toList();
   }
   
-  // Busca lojas da cidade selecionada
-  final storesInCity = await ref.watch(storesProvider.future);
-  final storeIdsInCity = storesInCity.map((s) => s.id).toSet();
+  // Filtra por categoria
+  if (selectedCategoryId != null) {
+    // Busca a categoria selecionada para obter seu nome
+    final allCategories = await ref.watch(allCategoriesProvider.future);
+    final selectedCategory = allCategories.where((c) => c.id == selectedCategoryId).firstOrNull;
+    
+    if (selectedCategory != null) {
+      // Busca todas as categorias com o mesmo nome (podem estar em diferentes lojistas)
+      final categoryNames = allCategories
+          .where((c) => c.name.toLowerCase() == selectedCategory.name.toLowerCase())
+          .map((c) => c.id)
+          .toSet();
+      
+      filteredProducts = filteredProducts.where((product) => 
+          product.category != null && categoryNames.contains(product.category)
+      ).toList();
+    }
+  }
   
-  // Filtra produtos pelos lojistas da cidade
-  return allProducts.where((product) => storeIdsInCity.contains(product.storeId)).toList();
+  return filteredProducts;
 });
 
 final productByIdProvider = FutureProvider.family<ProductEntity?, String>((ref, id) async {

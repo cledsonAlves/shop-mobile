@@ -114,10 +114,10 @@ class AuthNotifier extends StateNotifier<AuthState> {
     required String email,
     required String cpf,
     String? telefone,
-    String? endereco,
-    String? cidade,
-    String? estado,
-    String? cep,
+    required String endereco,
+    required String cidade,
+    required String estado,
+    required String cep,
   }) async {
     state = state.copyWith(status: AuthStatus.loading, errorMessage: null);
 

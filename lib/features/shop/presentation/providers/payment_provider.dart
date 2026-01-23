@@ -53,9 +53,8 @@ class PaymentNotifier extends StateNotifier<PaymentState> {
       );
 
       // Abre o link do Mercado Pago no navegador
-      // Em ambiente de teste, usa sandbox_init_point
       // Em produção, usar init_point
-      final url = Uri.parse(preference.sandboxInitPoint);
+      final url = Uri.parse(preference.initPoint);
       
       if (await canLaunchUrl(url)) {
         await launchUrl(url, mode: LaunchMode.externalApplication);

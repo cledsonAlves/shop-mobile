@@ -26,7 +26,12 @@ mixin _$StoreEntity {
   String? get description => throw _privateConstructorUsedError;
   String? get address => throw _privateConstructorUsedError;
   String? get phone => throw _privateConstructorUsedError;
+  String? get whatsapp => throw _privateConstructorUsedError;
+  String? get email => throw _privateConstructorUsedError;
   String? get cityId => throw _privateConstructorUsedError;
+  String? get cep => throw _privateConstructorUsedError;
+  String? get bairro => throw _privateConstructorUsedError;
+  String? get horarioFuncionamento => throw _privateConstructorUsedError;
   bool get isOpen => throw _privateConstructorUsedError;
 
   /// Create a copy of StoreEntity
@@ -53,7 +58,12 @@ abstract class $StoreEntityCopyWith<$Res> {
       String? description,
       String? address,
       String? phone,
+      String? whatsapp,
+      String? email,
       String? cityId,
+      String? cep,
+      String? bairro,
+      String? horarioFuncionamento,
       bool isOpen});
 }
 
@@ -82,7 +92,12 @@ class _$StoreEntityCopyWithImpl<$Res, $Val extends StoreEntity>
     Object? description = freezed,
     Object? address = freezed,
     Object? phone = freezed,
+    Object? whatsapp = freezed,
+    Object? email = freezed,
     Object? cityId = freezed,
+    Object? cep = freezed,
+    Object? bairro = freezed,
+    Object? horarioFuncionamento = freezed,
     Object? isOpen = null,
   }) {
     return _then(_value.copyWith(
@@ -126,9 +141,29 @@ class _$StoreEntityCopyWithImpl<$Res, $Val extends StoreEntity>
           ? _value.phone
           : phone // ignore: cast_nullable_to_non_nullable
               as String?,
+      whatsapp: freezed == whatsapp
+          ? _value.whatsapp
+          : whatsapp // ignore: cast_nullable_to_non_nullable
+              as String?,
+      email: freezed == email
+          ? _value.email
+          : email // ignore: cast_nullable_to_non_nullable
+              as String?,
       cityId: freezed == cityId
           ? _value.cityId
           : cityId // ignore: cast_nullable_to_non_nullable
+              as String?,
+      cep: freezed == cep
+          ? _value.cep
+          : cep // ignore: cast_nullable_to_non_nullable
+              as String?,
+      bairro: freezed == bairro
+          ? _value.bairro
+          : bairro // ignore: cast_nullable_to_non_nullable
+              as String?,
+      horarioFuncionamento: freezed == horarioFuncionamento
+          ? _value.horarioFuncionamento
+          : horarioFuncionamento // ignore: cast_nullable_to_non_nullable
               as String?,
       isOpen: null == isOpen
           ? _value.isOpen
@@ -157,7 +192,12 @@ abstract class _$$StoreEntityImplCopyWith<$Res>
       String? description,
       String? address,
       String? phone,
+      String? whatsapp,
+      String? email,
       String? cityId,
+      String? cep,
+      String? bairro,
+      String? horarioFuncionamento,
       bool isOpen});
 }
 
@@ -184,7 +224,12 @@ class __$$StoreEntityImplCopyWithImpl<$Res>
     Object? description = freezed,
     Object? address = freezed,
     Object? phone = freezed,
+    Object? whatsapp = freezed,
+    Object? email = freezed,
     Object? cityId = freezed,
+    Object? cep = freezed,
+    Object? bairro = freezed,
+    Object? horarioFuncionamento = freezed,
     Object? isOpen = null,
   }) {
     return _then(_$StoreEntityImpl(
@@ -228,9 +273,29 @@ class __$$StoreEntityImplCopyWithImpl<$Res>
           ? _value.phone
           : phone // ignore: cast_nullable_to_non_nullable
               as String?,
+      whatsapp: freezed == whatsapp
+          ? _value.whatsapp
+          : whatsapp // ignore: cast_nullable_to_non_nullable
+              as String?,
+      email: freezed == email
+          ? _value.email
+          : email // ignore: cast_nullable_to_non_nullable
+              as String?,
       cityId: freezed == cityId
           ? _value.cityId
           : cityId // ignore: cast_nullable_to_non_nullable
+              as String?,
+      cep: freezed == cep
+          ? _value.cep
+          : cep // ignore: cast_nullable_to_non_nullable
+              as String?,
+      bairro: freezed == bairro
+          ? _value.bairro
+          : bairro // ignore: cast_nullable_to_non_nullable
+              as String?,
+      horarioFuncionamento: freezed == horarioFuncionamento
+          ? _value.horarioFuncionamento
+          : horarioFuncionamento // ignore: cast_nullable_to_non_nullable
               as String?,
       isOpen: null == isOpen
           ? _value.isOpen
@@ -254,7 +319,12 @@ class _$StoreEntityImpl implements _StoreEntity {
       this.description,
       this.address,
       this.phone,
+      this.whatsapp,
+      this.email,
       this.cityId,
+      this.cep,
+      this.bairro,
+      this.horarioFuncionamento,
       this.isOpen = true});
 
   @override
@@ -278,14 +348,24 @@ class _$StoreEntityImpl implements _StoreEntity {
   @override
   final String? phone;
   @override
+  final String? whatsapp;
+  @override
+  final String? email;
+  @override
   final String? cityId;
+  @override
+  final String? cep;
+  @override
+  final String? bairro;
+  @override
+  final String? horarioFuncionamento;
   @override
   @JsonKey()
   final bool isOpen;
 
   @override
   String toString() {
-    return 'StoreEntity(id: $id, name: $name, category: $category, imageUrl: $imageUrl, rating: $rating, deliveryTime: $deliveryTime, deliveryFee: $deliveryFee, description: $description, address: $address, phone: $phone, cityId: $cityId, isOpen: $isOpen)';
+    return 'StoreEntity(id: $id, name: $name, category: $category, imageUrl: $imageUrl, rating: $rating, deliveryTime: $deliveryTime, deliveryFee: $deliveryFee, description: $description, address: $address, phone: $phone, whatsapp: $whatsapp, email: $email, cityId: $cityId, cep: $cep, bairro: $bairro, horarioFuncionamento: $horarioFuncionamento, isOpen: $isOpen)';
   }
 
   @override
@@ -308,7 +388,14 @@ class _$StoreEntityImpl implements _StoreEntity {
                 other.description == description) &&
             (identical(other.address, address) || other.address == address) &&
             (identical(other.phone, phone) || other.phone == phone) &&
+            (identical(other.whatsapp, whatsapp) ||
+                other.whatsapp == whatsapp) &&
+            (identical(other.email, email) || other.email == email) &&
             (identical(other.cityId, cityId) || other.cityId == cityId) &&
+            (identical(other.cep, cep) || other.cep == cep) &&
+            (identical(other.bairro, bairro) || other.bairro == bairro) &&
+            (identical(other.horarioFuncionamento, horarioFuncionamento) ||
+                other.horarioFuncionamento == horarioFuncionamento) &&
             (identical(other.isOpen, isOpen) || other.isOpen == isOpen));
   }
 
@@ -325,7 +412,12 @@ class _$StoreEntityImpl implements _StoreEntity {
       description,
       address,
       phone,
+      whatsapp,
+      email,
       cityId,
+      cep,
+      bairro,
+      horarioFuncionamento,
       isOpen);
 
   /// Create a copy of StoreEntity
@@ -349,7 +441,12 @@ abstract class _StoreEntity implements StoreEntity {
       final String? description,
       final String? address,
       final String? phone,
+      final String? whatsapp,
+      final String? email,
       final String? cityId,
+      final String? cep,
+      final String? bairro,
+      final String? horarioFuncionamento,
       final bool isOpen}) = _$StoreEntityImpl;
 
   @override
@@ -373,7 +470,17 @@ abstract class _StoreEntity implements StoreEntity {
   @override
   String? get phone;
   @override
+  String? get whatsapp;
+  @override
+  String? get email;
+  @override
   String? get cityId;
+  @override
+  String? get cep;
+  @override
+  String? get bairro;
+  @override
+  String? get horarioFuncionamento;
   @override
   bool get isOpen;
 

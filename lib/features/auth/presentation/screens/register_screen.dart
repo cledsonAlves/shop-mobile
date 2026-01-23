@@ -22,8 +22,6 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
   final _cidadeController = TextEditingController();
   final _estadoController = TextEditingController();
   final _cepController = TextEditingController();
-  
-  bool _showOptionalFields = false;
 
   @override
   void dispose() {
@@ -54,10 +52,10 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
       email: _emailController.text.trim(),
       cpf: _cpfController.text.trim(),
       telefone: _telefoneController.text.isNotEmpty ? _telefoneController.text.trim() : null,
-      endereco: _enderecoController.text.isNotEmpty ? _enderecoController.text.trim() : null,
-      cidade: _cidadeController.text.isNotEmpty ? _cidadeController.text.trim() : null,
-      estado: _estadoController.text.isNotEmpty ? _estadoController.text.trim() : null,
-      cep: _cepController.text.isNotEmpty ? _cepController.text.trim() : null,
+      endereco: _enderecoController.text.trim(),
+      cidade: _cidadeController.text.trim(),
+      estado: _estadoController.text.trim(),
+      cep: _cepController.text.trim(),
     );
 
     if (success && mounted) {
@@ -222,52 +220,42 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
 
                 const SizedBox(height: 24),
 
-                // Campos opcionais
-                InkWell(
-                  onTap: () {
-                    setState(() {
-                      _showOptionalFields = !_showOptionalFields;
-                    });
-                  },
-                  child: Row(
-                    children: [
-                      Icon(
-                        _showOptionalFields
-                            ? Icons.keyboard_arrow_up
-                            : Icons.keyboard_arrow_down,
-                        color: AppTheme.primaryColor,
-                      ),
-                      const SizedBox(width: 8),
-                      Text(
-                        'Informações adicionais (opcional)',
-                        style: TextStyle(
-                          color: AppTheme.primaryColor,
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ),
-                    ],
-                  ),
+                // Telefone (opcional)
+                _buildTextField(
+                  controller: _telefoneController,
+                  label: 'Telefone',
+                  hint: '(00) 00000-0000',
+                  prefixIcon: Icons.phone_outlined,
+                  keyboardType: TextInputType.phone,
+                  textInputAction: TextInputAction.next,
                 ),
 
-                if (_showOptionalFields) ...[
-                  const SizedBox(height: 16),
+                const SizedBox(height: 16),
 
-                  // Telefone
-                  _buildTextField(
-                    controller: _telefoneController,
-                    label: 'Telefone',
-                    hint: '(00) 00000-0000',
-                    prefixIcon: Icons.phone_outlined,
-                    keyboardType: TextInputType.phone,
-                    textInputAction: TextInputAction.next,
+                // Seção de Endereço
+                const Divider(height: 32),
+                Text(
+                  'Endereço de Entrega',
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.grey[800],
                   ),
-
-                  const SizedBox(height: 16),
+                ),
+                const SizedBox(height: 8),
+                Text(
+                  'Necessário para a entrega dos pedidos',
+                  style: TextStyle(
+                    fontSize: 14,
+                    color: Colors.grey[600],
+                  ),
+                ),
+                const SizedBox(height: 16),
 
                   // CEP
                   _buildTextField(
                     controller: _cepController,
-                    label: 'CEP',
+                    label: 'CEP *',
                     hint: '00000-000',
                     prefixIcon: Icons.location_on_outlined,
                     keyboardType: TextInputType.number,
@@ -276,6 +264,15 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                       FilteringTextInputFormatter.digitsOnly,
                       LengthLimitingTextInputFormatter(8),
                     ],
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Por favor, insira o CEP';
+                      }
+                      if (value.length != 8) {
+                        return 'CEP deve ter 8 dígitos';
+                      }
+                      return null;
+                    },
                   ),
 
                   const SizedBox(height: 16),
@@ -283,10 +280,19 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                   // Endereço
                   _buildTextField(
                     controller: _enderecoController,
-                    label: 'Endereço',
+                    label: 'Endereço *',
                     hint: 'Rua, número, complemento',
                     prefixIcon: Icons.home_outlined,
                     textInputAction: TextInputAction.next,
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Por favor, insira o endereço';
+                      }
+                      if (value.length < 5) {
+                        return 'Endereço muito curto';
+                      }
+                      return null;
+                    },
                   ),
 
                   const SizedBox(height: 16),
@@ -298,26 +304,40 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                         flex: 2,
                         child: _buildTextField(
                           controller: _cidadeController,
-                          label: 'Cidade',
+                          label: 'Cidade *',
                           hint: 'Sua cidade',
                           textInputAction: TextInputAction.next,
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'Campo obrigatório';
+                            }
+                            return null;
+                          },
                         ),
                       ),
                       const SizedBox(width: 16),
                       Expanded(
                         child: _buildTextField(
                           controller: _estadoController,
-                          label: 'Estado',
+                          label: 'Estado *',
                           hint: 'UF',
                           textInputAction: TextInputAction.done,
                           inputFormatters: [
                             LengthLimitingTextInputFormatter(2),
                           ],
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'Obrigatório';
+                            }
+                            if (value.length != 2) {
+                              return 'UF inválida';
+                            }
+                            return null;
+                          },
                         ),
                       ),
                     ],
                   ),
-                ],
 
                 const SizedBox(height: 32),
 

@@ -43,7 +43,12 @@ class StoreModel with _$StoreModel {
         deliveryFee: 5.0,
         description: descricao,
         address: _buildAddress(),
-        phone: whatsapp ?? telefone,
+        phone: telefone,
+        whatsapp: whatsapp,
+        email: email,
+        bairro: bairro,
+        cep: cep,
+        horarioFuncionamento: horarioFuncionamento,
         isOpen: ativo,
         cityId: cidadeId,
       );

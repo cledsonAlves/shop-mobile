@@ -19,6 +19,7 @@ mixin _$CategoryEntity {
   String get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
   String get icon => throw _privateConstructorUsedError;
+  String? get storeId => throw _privateConstructorUsedError;
   String? get description => throw _privateConstructorUsedError;
   String? get imageUrl => throw _privateConstructorUsedError;
 
@@ -39,6 +40,7 @@ abstract class $CategoryEntityCopyWith<$Res> {
       {String id,
       String name,
       String icon,
+      String? storeId,
       String? description,
       String? imageUrl});
 }
@@ -61,6 +63,7 @@ class _$CategoryEntityCopyWithImpl<$Res, $Val extends CategoryEntity>
     Object? id = null,
     Object? name = null,
     Object? icon = null,
+    Object? storeId = freezed,
     Object? description = freezed,
     Object? imageUrl = freezed,
   }) {
@@ -77,6 +80,10 @@ class _$CategoryEntityCopyWithImpl<$Res, $Val extends CategoryEntity>
           ? _value.icon
           : icon // ignore: cast_nullable_to_non_nullable
               as String,
+      storeId: freezed == storeId
+          ? _value.storeId
+          : storeId // ignore: cast_nullable_to_non_nullable
+              as String?,
       description: freezed == description
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
@@ -101,6 +108,7 @@ abstract class _$$CategoryEntityImplCopyWith<$Res>
       {String id,
       String name,
       String icon,
+      String? storeId,
       String? description,
       String? imageUrl});
 }
@@ -121,6 +129,7 @@ class __$$CategoryEntityImplCopyWithImpl<$Res>
     Object? id = null,
     Object? name = null,
     Object? icon = null,
+    Object? storeId = freezed,
     Object? description = freezed,
     Object? imageUrl = freezed,
   }) {
@@ -137,6 +146,10 @@ class __$$CategoryEntityImplCopyWithImpl<$Res>
           ? _value.icon
           : icon // ignore: cast_nullable_to_non_nullable
               as String,
+      storeId: freezed == storeId
+          ? _value.storeId
+          : storeId // ignore: cast_nullable_to_non_nullable
+              as String?,
       description: freezed == description
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
@@ -156,6 +169,7 @@ class _$CategoryEntityImpl implements _CategoryEntity {
       {required this.id,
       required this.name,
       required this.icon,
+      this.storeId,
       this.description,
       this.imageUrl});
 
@@ -166,13 +180,15 @@ class _$CategoryEntityImpl implements _CategoryEntity {
   @override
   final String icon;
   @override
+  final String? storeId;
+  @override
   final String? description;
   @override
   final String? imageUrl;
 
   @override
   String toString() {
-    return 'CategoryEntity(id: $id, name: $name, icon: $icon, description: $description, imageUrl: $imageUrl)';
+    return 'CategoryEntity(id: $id, name: $name, icon: $icon, storeId: $storeId, description: $description, imageUrl: $imageUrl)';
   }
 
   @override
@@ -183,6 +199,7 @@ class _$CategoryEntityImpl implements _CategoryEntity {
             (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.icon, icon) || other.icon == icon) &&
+            (identical(other.storeId, storeId) || other.storeId == storeId) &&
             (identical(other.description, description) ||
                 other.description == description) &&
             (identical(other.imageUrl, imageUrl) ||
@@ -191,7 +208,7 @@ class _$CategoryEntityImpl implements _CategoryEntity {
 
   @override
   int get hashCode =>
-      Object.hash(runtimeType, id, name, icon, description, imageUrl);
+      Object.hash(runtimeType, id, name, icon, storeId, description, imageUrl);
 
   /// Create a copy of CategoryEntity
   /// with the given fields replaced by the non-null parameter values.
@@ -208,6 +225,7 @@ abstract class _CategoryEntity implements CategoryEntity {
       {required final String id,
       required final String name,
       required final String icon,
+      final String? storeId,
       final String? description,
       final String? imageUrl}) = _$CategoryEntityImpl;
 
@@ -217,6 +235,8 @@ abstract class _CategoryEntity implements CategoryEntity {
   String get name;
   @override
   String get icon;
+  @override
+  String? get storeId;
   @override
   String? get description;
   @override

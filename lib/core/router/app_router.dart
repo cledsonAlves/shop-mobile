@@ -2,12 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import '../../features/shop/presentation/screens/splash_screen.dart';
 import '../../features/shop/presentation/screens/home_screen.dart';
-import '../../features/shop/presentation/screens/discover_products_screen.dart';
+import '../../features/shop/presentation/screens/stores_screen.dart';
 import '../../features/shop/presentation/screens/product_detail_screen.dart';
 import '../../features/shop/presentation/screens/orders_screen.dart';
 import '../../features/shop/presentation/screens/profile_screen.dart';
 import '../../features/shop/presentation/screens/main_navigation_screen.dart';
 import '../../features/shop/presentation/screens/store_screen.dart';
+import '../../features/shop/presentation/screens/store_details_screen.dart';
 import '../../features/shop/presentation/screens/delivery_code_screen.dart';
 import '../../features/auth/presentation/screens/login_screen.dart';
 import '../../features/auth/presentation/screens/register_screen.dart';
@@ -20,9 +21,10 @@ class AppRoutes {
   static const home = '/';
   static const productDetail = '/product/:id';
   static const storeDetail = '/store/:id';
+  static const storeInfo = '/store-info/:id';
   static const orderHistory = '/orders';
   static const profile = '/profile';
-  static const search = '/search';
+  static const stores = '/stores';
   static const deliveryCode = '/delivery-code/:id';
   static const login = '/login';
   static const register = '/register';
@@ -65,10 +67,10 @@ final goRouter = GoRouter(
           ),
         ),
         GoRoute(
-          path: AppRoutes.search,
+          path: AppRoutes.stores,
           pageBuilder: (context, state) => NoTransitionPage(
             key: state.pageKey,
-            child: const DiscoverProductsScreen(),
+            child: const StoresScreen(),
           ),
         ),
         GoRoute(
@@ -99,6 +101,13 @@ final goRouter = GoRouter(
       builder: (context, state) {
         final storeId = state.pathParameters['id']!;
         return StoreScreen(storeId: storeId);
+      },
+    ),
+    GoRoute(
+      path: '/store-info/:id',
+      builder: (context, state) {
+        final storeId = state.pathParameters['id']!;
+        return StoreDetailsScreen(storeId: storeId);
       },
     ),
     GoRoute(

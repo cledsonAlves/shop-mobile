@@ -521,12 +521,31 @@ class _CartScreenState extends ConsumerState<CartScreen> {
 
   Future<void> _checkout(AuthState authState, double taxaEntrega) async {
     if (!authState.isAuthenticated) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('Faça login para finalizar o pedido'),
-          backgroundColor: Colors.red,
+      // Mostra diálogo e redireciona para login
+      final shouldLogin = await showDialog<bool>(
+        context: context,
+        builder: (context) => AlertDialog(
+          title: const Text('Login Necessário'),
+          content: const Text('Para finalizar o pedido, você precisa estar logado. Deseja fazer login agora?'),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(context, false),
+              child: const Text('Cancelar'),
+            ),
+            ElevatedButton(
+              onPressed: () => Navigator.pop(context, true),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: AppTheme.primaryColor,
+              ),
+              child: const Text('Fazer Login', style: TextStyle(color: Colors.white)),
+            ),
+          ],
         ),
       );
+      
+      if (shouldLogin == true && mounted) {
+        context.push('/login');
+      }
       return;
     }
 

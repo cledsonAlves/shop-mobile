@@ -15,7 +15,7 @@ class MainNavigationScreen extends StatelessWidget {
     final location = GoRouterState.of(context).uri.toString();
     
     if (location.startsWith(AppRoutes.home)) return 0;
-    if (location.startsWith(AppRoutes.search)) return 1;
+    if (location.startsWith(AppRoutes.stores)) return 1;
     if (location.startsWith(AppRoutes.orderHistory)) return 2;
     if (location.startsWith(AppRoutes.profile)) return 3;
     
@@ -28,7 +28,7 @@ class MainNavigationScreen extends StatelessWidget {
         context.go(AppRoutes.home);
         break;
       case 1:
-        context.go(AppRoutes.search);
+        context.go(AppRoutes.stores);
         break;
       case 2:
         context.go(AppRoutes.orderHistory);
@@ -56,14 +56,14 @@ class MainNavigationScreen extends StatelessWidget {
             label: 'Home',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.storefront_outlined),
-            activeIcon: Icon(Icons.storefront),
-            label: 'Vitrine',
+            icon: Icon(Icons.store_outlined),
+            activeIcon: Icon(Icons.store),
+            label: 'Lojas',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.shopping_basket_outlined),
-            activeIcon: Icon(Icons.shopping_basket),
-            label: 'Cesta',
+            icon: Icon(Icons.receipt_long_outlined),
+            activeIcon: Icon(Icons.receipt_long),
+            label: 'Pedidos',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.person_outline),

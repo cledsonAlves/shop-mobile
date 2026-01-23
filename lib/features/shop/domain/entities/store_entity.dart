@@ -15,7 +15,12 @@ class StoreEntity with _$StoreEntity {
     String? description,
     String? address,
     String? phone,
+    String? whatsapp,
+    String? email,
     String? cityId,
+    String? cep,
+    String? bairro,
+    String? horarioFuncionamento,
     @Default(true) bool isOpen,
   }) = _StoreEntity;
 }

@@ -14,10 +14,10 @@ class RegisterClient {
     required String email,
     required String cpf,
     String? telefone,
-    String? endereco,
-    String? cidade,
-    String? estado,
-    String? cep,
+    required String endereco,
+    required String cidade,
+    required String estado,
+    required String cep,
   }) {
     return repository.registerClient(
       nome: nome,
